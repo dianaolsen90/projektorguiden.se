@@ -70,7 +70,15 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,44px);font-weig
 .trust-icon{font-size:1.1rem;display:block;margin-bottom:3px}
 .trust-cell strong{font-size:12px;font-weight:700;color:#111;display:block}
 .trust-cell span{font-size:10px;color:#888}
-.art-img{aspect-ratio:16/7;background:#f0e8e0;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:12px;color:#bbb;margin-bottom:1.5rem}
+.art-img{aspect-ratio:16/7;background:#f0e8e0;border:1px solid #ddd;margin-bottom:1.5rem;overflow:hidden}
+.art-img img,.body-img img,.hero-img img,.rel-img img,.cat-thumb img,.sec-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.body-img{margin:1.5rem 0;border:1px solid #ddd;overflow:hidden}
+.body-img img{aspect-ratio:16/9}
+.body-img-cap{font-size:11px;color:#888;font-style:italic;padding:6px 10px;background:#fafafa;border-top:1px solid #eee}
+.cmp-imgs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:1.5rem 0}
+.cmp-imgs figure{border:1px solid #ddd;overflow:hidden;margin:0}
+.cmp-imgs img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.cmp-imgs figcaption{font-size:10px;color:#888;padding:6px 8px;background:#fafafa;text-align:center}
 .body{font-family:'Source Sans 3',sans-serif;font-size:16px;color:#2a2a2a;line-height:1.85}
 .body p{margin-bottom:1.2rem}
 .body h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#111;border-bottom:1px solid #e0e0e0;padding-bottom:6px;margin:2rem 0 .8rem}
@@ -127,7 +135,7 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,44px);font-weig
 .rel-card{text-decoration:none;color:inherit;padding:0 16px;border-right:1px solid #ddd}
 .rel-card:first-child{padding-left:0}
 .rel-card:last-child{border-right:none;padding-right:0}
-.rel-img{aspect-ratio:16/9;background:#f0e8e0;border:1px solid #ddd;margin-bottom:8px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#ccc}
+.rel-img{aspect-ratio:16/9;background:#f0e8e0;border:1px solid #ddd;margin-bottom:8px;overflow:hidden}
 .rel-cat{font-size:8px;text-transform:uppercase;color:#cc0000;font-weight:700;display:block;margin-bottom:4px;letter-spacing:.1em}
 .rel-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#111;line-height:1.35}
 .rel-card:hover .rel-title{color:#cc0000}
@@ -155,7 +163,7 @@ aside .sb-title{font-size:9px;font-weight:700;letter-spacing:.15em;color:#cc0000
 .cat-list{max-width:1100px;margin:0 auto;padding:2rem}
 .cat-item{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid #e0e0e0;text-decoration:none;color:inherit}
 .cat-item:hover .cat-item-title{color:#cc0000}
-.cat-thumb{background:#f0e8e0;aspect-ratio:4/3;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:10px;color:#ccc}
+.cat-thumb{background:#f0e8e0;aspect-ratio:4/3;border:1px solid #ddd;overflow:hidden}
 .cat-item-cat{font-size:7px;color:#cc0000;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:3px}
 .cat-item-title{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#111;line-height:1.25;letter-spacing:-.02em;margin-bottom:4px}
 .cat-item-meta{font-size:8px;color:#999;font-style:italic}
@@ -190,7 +198,7 @@ aside .sb-title{font-size:9px;font-weight:700;letter-spacing:.15em;color:#cc0000
 .review-card p{margin:0;font-size:14px;color:#555;font-style:italic;line-height:1.65}
 .review-meta{font-size:10px;color:#999;margin-top:6px;font-style:normal}
 @media(max-width:1024px){.article-grid{grid-template-columns:1fr}aside{display:none}.related-grid{grid-template-columns:repeat(2,1fr)}.rel-card{border-right:none;padding:0 0 16px;margin-bottom:16px;border-bottom:1px solid #ddd}.rel-card:last-child{border-bottom:none}}
-@media(max-width:768px){.trust-bar{grid-template-columns:repeat(2,1fr)}.trust-cell:nth-child(2){border-right:none}.trust-cell:nth-child(3),.trust-cell:nth-child(4){border-top:1px solid #ddd}.pc{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr}.cat-item{grid-template-columns:90px 1fr}}
+@media(max-width:768px){.trust-bar{grid-template-columns:repeat(2,1fr)}.trust-cell:nth-child(2){border-right:none}.trust-cell:nth-child(3),.trust-cell:nth-child(4){border-top:1px solid #ddd}.pc{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr}.cat-item{grid-template-columns:90px 1fr}.cmp-imgs{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -205,10 +213,11 @@ aside .sb-title{font-size:9px;font-weight:700;letter-spacing:.15em;color:#cc0000
 <hr class="meta-rule"/>
 </div>
 
-<div class="art-img">[ Artikelbild ]</div>
+<div class="art-img"><img src="bilder/minilux-pro-2/livingroom.jpeg" alt="MiniLux Pro 2 i vardagsrum" loading="lazy"/></div>
 <div class="body">
 <p>Frågan vi får oftast är inte om MiniLux är bra, utan om man ska välja MiniLux Pro för 1 499 kr eller MiniLux Pro 2 för 1 999 kr. Båda är kompakta smartprojektorer med 4000+ appar, keystone, 180 graders roterbar lins, HDMI, USB och 3,5 mm, cirka 1 kg och 25 dB fläktljud. Ingen har batteri. Båda har 2 års garanti. Skillnaderna sitter i bild, ljus och nätverk.</p>
 <p>MiniLux Pro levererar XGA 1280×720 med stöd för 1080P, 2K och 4K-signaler, 200 ANSI Lumen och skärm 30 till 130 tum med standard WiFi. MiniLux Pro 2 har native 1920×1080P med 4K-stöd, 390 ANSI Lumen, kontrast 10 000:1, skärm 40 till 150 tum, WiFi 6 dual band, Bluetooth 5.0 och 5W HiFi-högtalare. På papperet är Pro 2 en tydlig uppgradering. I praktiken beror valet på var och när du tittar.</p>
+<div class="cmp-imgs"><figure><img src="bilder/minilux-pro/bord.jpeg" alt="MiniLux Pro" loading="lazy"/><figcaption>MiniLux Pro</figcaption></figure><figure><img src="bilder/minilux-pro-2/livingroom.jpeg" alt="MiniLux Pro 2" loading="lazy"/><figcaption>MiniLux Pro 2</figcaption></figure></div>
 <h2>Jämförelsetabell</h2>
 <table class="cmp-tbl">
 <tr><th></th><th>MiniLux Pro</th><th>MiniLux Pro 2</th></tr>
@@ -221,8 +230,10 @@ aside .sb-title{font-size:9px;font-weight:700;letter-spacing:.15em;color:#cc0000
 </table>
 <h2>Välj MiniLux Pro om</h2>
 <p>Du har en strikt budget under 1 500 kr och planerar nästan uteslutande filmkvällar i mörklagt rum. 200 ANSI Lumen räcker då gott för 90 till 110 tum. Sovrum med takprojicering och barnrum är typiska Pro-scenarier. Du accepterar XGA och kan leva med standard WiFi om routern står nära. Pro är också rätt om du är osäker på om projektor passar familjen och vill testa konceptet billigt.</p>
+<figure class="body-img"><img src="bilder/minilux-pro/tak.jpeg" alt="MiniLux Pro takprojicering" loading="lazy"/><figcaption class="body-img-cap">Typiskt Pro-scenario: takbild i mörklagt sovrum.</figcaption></figure>
 <h2>Välj MiniLux Pro 2 om</h2>
 <p>Du tänker använda projektorn i vardagsrum med lite ljus från fönster, vill ha native 1080P för sport och spel, eller streamar mycket utan extern mediaspelare. WiFi 6 märktes i vårt test när flera enheter var uppkopplade samtidigt. 390 ANSI Lumen gör att du inte behöver göra rummet helt mörkt för en vardagskväll. Skillnaden på 500 kr amortiseras snabbt om du annars skulle köpa en extra streamingbox eller starkare lampor.</p>
+<figure class="body-img"><img src="bilder/minilux-pro-2/kidsroom.png" alt="MiniLux Pro 2 i barnrum" loading="lazy"/><figcaption class="body-img-cap">Pro 2 passar barnrum och vardagsrum med mer ambient ljus.</figcaption></figure>
 <h2>Vår slutsats</h2>
 <p>För de flesta familjer som ska ha projektor i vardagsrummet rekommenderar vi Pro 2. Pro är fortfarande ett starkt förstaköp i mörka rum. Läs våra separata <a href="minilux-pro-recension.html">MiniLux Pro recension</a> och <a href="minilux-pro-2-recension.html">MiniLux Pro 2 recension</a> för fler detaljer.</p>
 <div class="cta-box"><div class="cta-left"><span class="cta-label">Vill du läsa mer?</span><div class="cta-name">MiniLux Pro 2</div><div class="cta-tag">Se aktuellt pris och tillgänglighet</div></div><a class="cta-btn" href="https://miniprojektor.se/products/minilux-pro-2-smart-miniprojektor-med-bluetooth-och-wifi-svart" rel="dofollow">Läs mer om MiniLux Pro 2</a></div></div>
@@ -236,7 +247,7 @@ aside .sb-title{font-size:9px;font-weight:700;letter-spacing:.15em;color:#cc0000
 <div class="bio-stat"><strong>140+</strong><span>Artiklar</span></div>
 <div class="bio-stat"><strong>30+</strong><span>Projektorer</span></div>
 </div></div></div>
-<div class="related"><div class="related-title">Fler artiklar</div><div class="related-grid"><a class="rel-card" href="minilux-pro-recension.html"><div class="rel-img">[ Bild ]</div><span class="rel-cat">Recension</span><div class="rel-title">MiniLux Pro recension</div></a><a class="rel-card" href="minilux-pro-2-recension.html"><div class="rel-img">[ Bild ]</div><span class="rel-cat">Recension</span><div class="rel-title">MiniLux Pro 2 recension</div></a><a class="rel-card" href="basta-projektorer-2026.html"><div class="rel-img">[ Bild ]</div><span class="rel-cat">Guide</span><div class="rel-title">Bästa projektorerna 2026</div></a></div></div>
+<div class="related"><div class="related-title">Fler artiklar</div><div class="related-grid"><a class="rel-card" href="minilux-pro-recension.html"><div class="rel-img"><img src="bilder/minilux-pro/closeup.jpeg" alt="MiniLux Pro smart miniprojektor" loading="lazy"/></div><span class="rel-cat">Recension</span><div class="rel-title">MiniLux Pro recension</div></a><a class="rel-card" href="minilux-pro-2-recension.html"><div class="rel-img"><img src="bilder/minilux-pro-2/white.png" alt="MiniLux Pro 2 smart miniprojektor" loading="lazy"/></div><span class="rel-cat">Recension</span><div class="rel-title">MiniLux Pro 2 recension</div></a><a class="rel-card" href="basta-projektorer-2026.html"><div class="rel-img"><img src="bilder/minilux-pro-2/livingroom.jpeg" alt="MiniLux Pro 2 i vardagsrum" loading="lazy"/></div><span class="rel-cat">Guide</span><div class="rel-title">Bästa projektorerna 2026</div></a></div></div>
 </article>
 <aside><div class="sb-section"><div class="sb-title">Mest läst</div><ul class="sb-posts">
 <li><a href="minilux-pro-recension.html"><span class="sb-rank">01</span><div><div class="sb-link-title">MiniLux Pro recension</div></div></a></li>

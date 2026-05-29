@@ -70,7 +70,15 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,44px);font-weig
 .trust-icon{font-size:1.1rem;display:block;margin-bottom:3px}
 .trust-cell strong{font-size:12px;font-weight:700;color:#111;display:block}
 .trust-cell span{font-size:10px;color:#888}
-.art-img{aspect-ratio:16/7;background:#f0e8e0;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:12px;color:#bbb;margin-bottom:1.5rem}
+.art-img{aspect-ratio:16/7;background:#f0e8e0;border:1px solid #ddd;margin-bottom:1.5rem;overflow:hidden}
+.art-img img,.body-img img,.hero-img img,.rel-img img,.cat-thumb img,.sec-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.body-img{margin:1.5rem 0;border:1px solid #ddd;overflow:hidden}
+.body-img img{aspect-ratio:16/9}
+.body-img-cap{font-size:11px;color:#888;font-style:italic;padding:6px 10px;background:#fafafa;border-top:1px solid #eee}
+.cmp-imgs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:1.5rem 0}
+.cmp-imgs figure{border:1px solid #ddd;overflow:hidden;margin:0}
+.cmp-imgs img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.cmp-imgs figcaption{font-size:10px;color:#888;padding:6px 8px;background:#fafafa;text-align:center}
 .body{font-family:'Source Sans 3',sans-serif;font-size:16px;color:#2a2a2a;line-height:1.85}
 .body p{margin-bottom:1.2rem}
 .body h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#111;border-bottom:1px solid #e0e0e0;padding-bottom:6px;margin:2rem 0 .8rem}
@@ -127,7 +135,7 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,44px);font-weig
 .rel-card{text-decoration:none;color:inherit;padding:0 16px;border-right:1px solid #ddd}
 .rel-card:first-child{padding-left:0}
 .rel-card:last-child{border-right:none;padding-right:0}
-.rel-img{aspect-ratio:16/9;background:#f0e8e0;border:1px solid #ddd;margin-bottom:8px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#ccc}
+.rel-img{aspect-ratio:16/9;background:#f0e8e0;border:1px solid #ddd;margin-bottom:8px;overflow:hidden}
 .rel-cat{font-size:8px;text-transform:uppercase;color:#cc0000;font-weight:700;display:block;margin-bottom:4px;letter-spacing:.1em}
 .rel-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#111;line-height:1.35}
 .rel-card:hover .rel-title{color:#cc0000}
@@ -155,7 +163,7 @@ aside .sb-title{font-size:9px;font-weight:700;letter-spacing:.15em;color:#cc0000
 .cat-list{max-width:1100px;margin:0 auto;padding:2rem}
 .cat-item{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid #e0e0e0;text-decoration:none;color:inherit}
 .cat-item:hover .cat-item-title{color:#cc0000}
-.cat-thumb{background:#f0e8e0;aspect-ratio:4/3;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:10px;color:#ccc}
+.cat-thumb{background:#f0e8e0;aspect-ratio:4/3;border:1px solid #ddd;overflow:hidden}
 .cat-item-cat{font-size:7px;color:#cc0000;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:3px}
 .cat-item-title{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#111;line-height:1.25;letter-spacing:-.02em;margin-bottom:4px}
 .cat-item-meta{font-size:8px;color:#999;font-style:italic}
@@ -190,12 +198,14 @@ aside .sb-title{font-size:9px;font-weight:700;letter-spacing:.15em;color:#cc0000
 .review-card p{margin:0;font-size:14px;color:#555;font-style:italic;line-height:1.65}
 .review-meta{font-size:10px;color:#999;margin-top:6px;font-style:normal}
 @media(max-width:1024px){.article-grid{grid-template-columns:1fr}aside{display:none}.related-grid{grid-template-columns:repeat(2,1fr)}.rel-card{border-right:none;padding:0 0 16px;margin-bottom:16px;border-bottom:1px solid #ddd}.rel-card:last-child{border-bottom:none}}
-@media(max-width:768px){.trust-bar{grid-template-columns:repeat(2,1fr)}.trust-cell:nth-child(2){border-right:none}.trust-cell:nth-child(3),.trust-cell:nth-child(4){border-top:1px solid #ddd}.pc{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr}.cat-item{grid-template-columns:90px 1fr}}
+@media(max-width:768px){.trust-bar{grid-template-columns:repeat(2,1fr)}.trust-cell:nth-child(2){border-right:none}.trust-cell:nth-child(3),.trust-cell:nth-child(4){border-top:1px solid #ddd}.pc{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr}.cat-item{grid-template-columns:90px 1fr}.cmp-imgs{grid-template-columns:1fr}}
 
 .paper-grid{display:grid;grid-template-columns:1.8fr 1px 1.3fr 1px 0.9fr;padding:16px 0}
 .col-divider{background:#ddd}
 .col-main{padding:0 20px 0 0}
-.hero-img{background:#f0e8e0;aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;font-size:11px;color:#ccc;margin-bottom:10px}
+.hero-img{background:#f0e8e0;aspect-ratio:3/2;margin-bottom:10px;overflow:hidden;border:1px solid #ddd}
+.sec-story-with-img{display:grid;grid-template-columns:72px 1fr;gap:10px}
+.sec-thumb{aspect-ratio:4/3;background:#f0e8e0;border:1px solid #ddd;overflow:hidden}
 .cat-label{background:#ea580c;display:inline;padding:2px 6px;font-size:8px;color:#fff;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
 .main-headline{font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,28px);font-weight:900;color:#111;line-height:1.1;letter-spacing:-.03em;margin-top:6px;margin-bottom:6px}
 .main-byline{font-size:9px;color:#888;font-style:italic;margin-bottom:6px}
@@ -230,7 +240,7 @@ aside .sb-title{font-size:9px;font-weight:700;letter-spacing:.15em;color:#cc0000
 <div class="container">
 <div class="paper-grid">
 <div class="col-main">
-<div class="hero-img">[ Omslagsbild ]</div>
+<div class="hero-img"><img src="bilder/minilux-pro-2/livingroom.jpeg" alt="Bästa projektorerna 2026" loading="lazy"/></div>
 <span class="cat-label">Guide</span>
 <h2 class="main-headline">Bästa projektorerna 2026: vår kompletta guide för alla budgetar</h2>
 <div class="main-byline">Av Erik Lindström, 20 maj 2026</div>
@@ -238,7 +248,7 @@ aside .sb-title{font-size:9px;font-weight:700;letter-spacing:.15em;color:#cc0000
 <a class="read-more" href="basta-projektorer-2026.html">Läs hela artikeln →</a>
 </div>
 <div class="col-divider"></div>
-<div class="col-secondary"><a class="sec-story" href="miniprojektor-se-omdome.html"><span class="sec-cat">Omdöme</span><div class="sec-headline">Miniprojektor.se omdöme: vad säger svenska köpare?</div><div class="sec-byline">Av Per Bergman, 26 maj 2026</div></a><a class="sec-story" href="miniprojektor-se-recension.html"><span class="sec-cat">Recension</span><div class="sec-headline">Miniprojektor.se recension: pålitlig butik för projektorer?</div><div class="sec-byline">Av Erik Lindström, 24 maj 2026</div></a><a class="sec-story" href="minilux-pro-2-recension.html"><span class="sec-cat">Recension</span><div class="sec-headline">MiniLux Pro 2 recension 2026: native 1080P och 390 ANSI testad</div><div class="sec-byline">Av Erik Lindström, 22 maj 2026</div></a><a class="sec-story" href="minilux-pro-recension.html"><span class="sec-cat">Recension</span><div class="sec-headline">MiniLux Pro recension 2026: 200 ANSI Lumen i 30 dagars test</div><div class="sec-byline">Av Per Bergman, 16 maj 2026</div></a><a class="sec-story" href="varfor-kopa-projektor.html"><span class="sec-cat">Guide</span><div class="sec-headline">Varför du ska köpa en projektor istället för en stor-TV 2026</div><div class="sec-byline">Av Anna Svensson, 8 maj 2026</div></a><a class="sec-story" href="ansi-lumen-guide.html"><span class="sec-cat">Teknik</span><div class="sec-headline">ANSI Lumen förklarat 2026: hur mycket ljusstyrka behöver du?</div><div class="sec-byline">Av Erik Lindström, 4 maj 2026</div></a></div>
+<div class="col-secondary"><a class="sec-story" href="miniprojektor-se-omdome.html"><span class="sec-cat">Omdöme</span><div class="sec-headline">Miniprojektor.se omdöme: vad säger svenska köpare?</div><div class="sec-byline">Av Per Bergman, 26 maj 2026</div></a><a class="sec-story" href="miniprojektor-se-recension.html"><span class="sec-cat">Recension</span><div class="sec-headline">Miniprojektor.se recension: pålitlig butik för projektorer?</div><div class="sec-byline">Av Erik Lindström, 24 maj 2026</div></a><a class="sec-story sec-story-with-img" href="minilux-pro-2-recension.html"><div class="sec-thumb"><img src="bilder/minilux-pro-2/livingroom.jpeg" alt="MiniLux Pro 2 recension 2026: native 1080P och 390 ANSI testad" loading="lazy"/></div><div><span class="sec-cat">Recension</span><div class="sec-headline">MiniLux Pro 2 recension 2026: native 1080P och 390 ANSI testad</div><div class="sec-byline">Av Erik Lindström, 22 maj 2026</div></div></a><a class="sec-story sec-story-with-img" href="minilux-pro-recension.html"><div class="sec-thumb"><img src="bilder/minilux-pro/movienight.png" alt="MiniLux Pro recension 2026: 200 ANSI Lumen i 30 dagars test" loading="lazy"/></div><div><span class="sec-cat">Recension</span><div class="sec-headline">MiniLux Pro recension 2026: 200 ANSI Lumen i 30 dagars test</div><div class="sec-byline">Av Per Bergman, 16 maj 2026</div></div></a><a class="sec-story" href="varfor-kopa-projektor.html"><span class="sec-cat">Guide</span><div class="sec-headline">Varför du ska köpa en projektor istället för en stor-TV 2026</div><div class="sec-byline">Av Anna Svensson, 8 maj 2026</div></a><a class="sec-story" href="ansi-lumen-guide.html"><span class="sec-cat">Teknik</span><div class="sec-headline">ANSI Lumen förklarat 2026: hur mycket ljusstyrka behöver du?</div><div class="sec-byline">Av Erik Lindström, 4 maj 2026</div></a></div>
 <div class="col-divider"></div>
 <div class="col-sidebar"><div class="sb-section"><div class="sb-title">Mest läst</div><ul class="sb-posts">
 <li><a href="minilux-pro-recension.html"><span class="sb-rank">01</span><div><div class="sb-link-title">MiniLux Pro recension</div></div></a></li>
