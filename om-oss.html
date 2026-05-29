@@ -3,142 +3,181 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Om oss | ProjektorTips.se</title>
-<meta name="description" content="Lär känna redaktionen bakom ProjektorTips.se. Oberoende tester sedan 2023."/>
+<title>Om oss | projektorguiden.se</title>
+<meta name="description" content="Lär känna redaktionen bakom projektorguiden.se. Oberoende tester sedan 2023."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{background:#fff;color:#111;font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.topbar{background:#f2f2f2;border-bottom:1px solid #e4e4e4;padding:.4rem 2rem;display:flex;justify-content:space-between;align-items:center}
-.topbar p,.topbar span,.topbar-right{font-size:.72rem;color:#888}
-nav{border-bottom:2px solid #111;padding:0 2rem;background:#fff;position:sticky;top:0;z-index:100}
-.nav-top{display:flex;align-items:center;justify-content:space-between;height:62px}
-.brand{font-family:'Merriweather',serif;font-size:1.5rem;font-weight:700;color:#111;text-decoration:none;letter-spacing:-.02em}
-.brand span{color:#c0392b}
-.nav-search input{border:1px solid #ddd;border-radius:4px;padding:.3rem .7rem;font-size:.8rem;font-family:'Inter',sans-serif;outline:none;width:180px}
-.nav-back{font-size:.82rem;font-weight:600;color:#555;text-decoration:none}
-.nav-back:hover{color:#111}
-.cat-nav{display:flex;gap:0;border-top:1px solid #e8e8e8;overflow-x:auto}
-.cat-nav a{font-size:.78rem;font-weight:600;color:#444;text-decoration:none;padding:.6rem 1.1rem;white-space:nowrap;border-bottom:2px solid transparent;transition:all .15s;text-transform:uppercase;letter-spacing:.04em}
-.cat-nav a:hover{color:#111;border-bottom-color:#111}
-.cat-nav a.active{color:#c0392b;border-bottom-color:#c0392b}
-.container{max-width:1100px;margin:0 auto;padding:0 2rem}
-footer{background:#111;color:#fff;padding:3rem 2rem 2rem}
+body{background:#fff;color:#111;font-family:'Source Sans 3',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.breaking-bar{height:28px;background:#cc0000;display:flex;align-items:center;padding:0 2rem;gap:20px}
+.breaking-label{background:#fff;color:#cc0000;font-size:8px;font-weight:900;letter-spacing:.2em;padding:2px 8px;flex-shrink:0}
+.breaking-text{font-size:10px;color:rgba(255,255,255,.85);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.breaking-date{font-size:9px;color:rgba(255,255,255,.5);margin-left:auto;flex-shrink:0}
+.masthead{text-align:center;padding:16px 2rem 12px;border-bottom:4px double #111}
+.masthead-name{font-family:'Playfair Display',serif;font-size:clamp(28px,6vw,52px);font-weight:900;color:#111;letter-spacing:-.04em;text-transform:uppercase;line-height:1;text-decoration:none;display:block}
+.masthead-name .se{color:#ea580c}
+.masthead-rule{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:8px}
+.masthead-rule::before,.masthead-rule::after{content:'';flex:1;height:1px;background:#ccc;max-width:200px}
+.masthead-tagline{font-size:9px;letter-spacing:.25em;color:#888;text-transform:uppercase;white-space:nowrap}
+.compact-brand{padding:10px 2rem;border-bottom:1px solid #ddd}
+.compact-brand a{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#111;text-decoration:none;letter-spacing:-.03em;text-transform:uppercase}
+.compact-brand a .se{color:#ea580c}
+.cat-ribbon{display:flex;border-top:2px solid #111;border-bottom:2px solid #111;overflow-x:auto;background:#fff;position:sticky;top:0;z-index:100}
+.cat-ribbon a{text-decoration:none;display:flex;align-items:center;flex-shrink:0}
+.cat-ribbon a:first-child{background:#111;padding:7px 16px}
+.cat-ribbon a:first-child span{font-size:10px;color:#fff;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.cat-ribbon a:not(:first-child){padding:7px 14px;border-right:1px solid #ddd}
+.cat-ribbon a:not(:first-child) span{font-size:10px;color:#111;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.cat-ribbon a:not(:first-child):hover{background:#f5f5f5}
+.cat-ribbon a.active{background:#ea580c}
+.cat-ribbon a.active span{color:#fff}
+.container{max-width:1160px;margin:0 auto;padding:0 2rem}
+.container-narrow{max-width:1100px;margin:0 auto;padding:0 2rem}
+footer{background:#111;color:#fff;padding:3rem 2rem 2rem;border-top:4px solid #ea580c}
 .footer-inner{max-width:1100px;margin:0 auto}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
-.footer-brand{font-family:'Merriweather',serif;font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:.6rem}
-.footer-brand span{color:#c0392b}
-.footer-about{font-size:.82rem;color:#888;line-height:1.65;max-width:260px}
-.footer-col h4{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#555;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid #333}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-bottom:2rem}
+.footer-brand{font-family:'Playfair Display',serif;font-size:22px;color:#fff;font-weight:900;margin-bottom:6px}
+.footer-brand .se{color:#ea580c}
+.footer-about{font-size:12px;color:#888;margin-top:6px;max-width:240px;line-height:1.6}
+.footer-col h4{font-size:9px;font-weight:700;letter-spacing:.18em;color:#ea580c;text-transform:uppercase;border-bottom:1px solid #333;padding-bottom:8px;margin-bottom:12px}
 .footer-col ul{list-style:none}
-.footer-col li{margin-bottom:.5rem}
-.footer-col a{font-size:.83rem;color:#888;text-decoration:none}
+.footer-col a{font-size:12px;color:#888;text-decoration:none;display:block;margin-bottom:7px}
 .footer-col a:hover{color:#fff}
-.footer-bottom{padding-top:1.5rem;border-top:1px solid #222;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
-.footer-bottom p{font-size:.75rem;color:#555}
-.footer-bottom a{color:#888;text-decoration:none}
+.footer-bottom{border-top:1px solid #222;padding-top:1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.footer-bottom p,.footer-bottom a{font-size:11px;color:#555;text-decoration:none}
 .footer-bottom a:hover{color:#fff}
-@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:580px){.footer-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr}.breaking-text{max-width:180px}}
 
-.article-grid{display:grid;grid-template-columns:1fr 280px;gap:4rem;padding:2.5rem 0 5rem}
-.art-cat{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c0392b;margin-bottom:.6rem}
-h1{font-family:'Merriweather',serif;font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:700;line-height:1.25;color:#111;margin-bottom:.8rem}
-.art-intro{font-family:'Merriweather',serif;font-style:italic;font-size:1rem;color:#555;line-height:1.75;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid #e8e8e8}
-.art-meta{display:flex;align-items:center;gap:.5rem;font-size:.73rem;color:#aaa;margin-bottom:1rem;flex-wrap:wrap}
-.dot{width:3px;height:3px;border-radius:50%;background:#ccc;display:inline-block}
-.trust-bar{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;font-size:.72rem;color:#666;margin-bottom:1.5rem;padding:.8rem 1rem;background:#fafaf8;border:1px solid #e8e8e8}
-.trust-bar span{display:flex;align-items:center;gap:.35rem}
-.trust-bar span::before{content:'';width:6px;height:6px;border-radius:50%;background:#27ae60}
-.art-img{background:#f0ece6;border-radius:4px;aspect-ratio:16/7;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:#bbb;margin-bottom:2rem}
-.body{font-size:.98rem;color:#222;line-height:1.85}
+.article-grid{display:grid;grid-template-columns:1fr 220px;gap:3rem;padding:2rem 0 4rem}
+.art-header{border-bottom:2px solid #111;padding-bottom:14px;margin-bottom:20px}
+.art-cat{background:#ea580c;display:inline-block;padding:3px 8px;margin-bottom:8px;font-size:9px;color:#fff;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.art-cat.cat-dark{background:#111}
+h1{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,44px);font-weight:900;color:#111;line-height:1.1;letter-spacing:-.03em;margin-bottom:10px}
+.art-intro{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:#555;line-height:1.65;margin-bottom:14px}
+.art-meta{display:flex;align-items:center;gap:8px;font-size:11px;color:#888;flex-wrap:wrap}
+.art-meta strong{font-weight:600;color:#333}
+.meta-sep{color:#ccc}
+.meta-rule{border:none;border-top:1px solid #ddd;margin-top:12px}
+.trust-bar{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #ddd;margin:16px 0}
+.trust-cell{padding:10px 14px;border-right:1px solid #ddd;text-align:center}
+.trust-cell:last-child{border-right:none}
+.trust-icon{font-size:1.1rem;display:block;margin-bottom:3px}
+.trust-cell strong{font-size:12px;font-weight:700;color:#111;display:block}
+.trust-cell span{font-size:10px;color:#888}
+.art-img{aspect-ratio:16/7;background:#f0e8e0;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:12px;color:#bbb;margin-bottom:1.5rem}
+.body{font-family:'Source Sans 3',sans-serif;font-size:16px;color:#2a2a2a;line-height:1.85}
 .body p{margin-bottom:1.2rem}
-.body h2{font-family:'Merriweather',serif;font-size:1.25rem;font-weight:700;margin:2.2rem 0 .7rem;color:#111}
+.body h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#111;border-bottom:1px solid #e0e0e0;padding-bottom:6px;margin:2rem 0 .8rem}
 .body ul,.body ol{padding-left:1.4rem;margin-bottom:1.2rem}
 .body li{margin-bottom:.5rem}
-.body a{color:#c0392b}
-.callout{background:#fafaf8;border-left:3px solid #c0392b;padding:.9rem 1.2rem;margin:1.5rem 0}
-.callout p{margin:0;font-size:.9rem;color:#555;font-style:italic}
-.spec-tbl,.cmp-tbl{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.88rem;border:1px solid #e8e8e8}
-.spec-tbl td,.cmp-tbl td,.cmp-tbl th{padding:.6rem .9rem;border-bottom:1px solid #f0f0f0;color:#444}
-.spec-tbl td:first-child,.cmp-tbl th{background:#fafaf8;font-weight:600;color:#111}
-.score-box{background:#fafaf8;border:1px solid #e8e8e8;padding:1.4rem;margin:1.5rem 0}
-.score-row{display:flex;align-items:center;gap:1rem;margin-bottom:.7rem}
-.score-lbl{font-size:.8rem;width:170px;flex-shrink:0}
-.score-bar{flex:1;background:#e8e8e4;border-radius:2px;height:4px;overflow:hidden}
-.score-fill{height:100%;background:#c0392b}
-.score-val{font-size:.8rem;font-weight:600;width:26px;text-align:right}
-.score-total{margin-top:1rem;padding-top:1rem;border-top:1px solid #e8e8e8;display:flex;align-items:baseline;gap:.5rem}
-.score-num{font-family:'Merriweather',serif;font-size:2.5rem;font-weight:700}
-.pc{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
-.pc-box{border:1px solid #e8e8e8;padding:1.1rem}
-.pc-box h4{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.7rem}
-.pros h4{color:#27ae60}.cons h4{color:#c0392b}
+.body a{color:#cc0000;text-decoration:underline}
+.callout{border-left:4px solid #ea580c;padding:10px 14px;background:#fffaf7;margin:1.5rem 0}
+.callout p{margin:0;font-size:14px;color:#555;line-height:1.7;font-style:italic}
+.spec-tbl,.cmp-tbl{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:13px;border:1px solid #ddd}
+.cmp-tbl th,.spec-tbl th{background:#111;color:#fff;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:8px 12px;text-align:left}
+.spec-tbl td,.cmp-tbl td{padding:8px 12px;border-bottom:1px solid #eee;color:#444}
+.spec-tbl td:first-child,.cmp-tbl td:first-child{font-weight:600;color:#111;background:#fafafa;width:45%}
+.cmp-tbl tr:last-child td,.spec-tbl tr:last-child td{border-bottom:none}
+.score-box{border:1px solid #ddd;padding:1.2rem;margin:1.5rem 0}
+.score-title{font-size:9px;font-weight:700;letter-spacing:.15em;color:#888;text-transform:uppercase;border-bottom:1px solid #eee;padding-bottom:8px;margin-bottom:12px}
+.score-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.score-lbl{font-size:13px;color:#555;width:160px;flex-shrink:0}
+.score-bar{flex:1;background:#e8e8e4;height:3px;overflow:hidden}
+.score-fill{height:100%;background:#cc0000}
+.score-val{font-size:13px;font-weight:700;width:28px;text-align:right}
+.score-total{display:flex;align-items:baseline;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid #eee}
+.score-num{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:#111}
+.score-stars{color:#ea580c;font-size:14px}
+.score-label{font-size:12px;color:#888}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:1.5rem 0}
+.pc-box{padding-top:10px}
+.pros{border-top:3px solid #111}
+.cons{border-top:3px solid #cc0000}
+.pc-box h4{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
+.pros h4{color:#111}.cons h4{color:#cc0000}
 .pc-box ul{list-style:none}
-.pc-box li{font-size:.83rem;padding:.32rem 0;display:flex;gap:.5rem;border-bottom:1px solid #f5f5f5}
-.pros li::before{content:'✓';color:#27ae60;font-weight:700}
-.cons li::before{content:'✗';color:#c0392b;font-weight:700}
-.cta-box{background:#111;color:#fff;padding:2rem;margin:2rem 0;text-align:center;border-radius:4px}
-.cta-box h3{font-family:'Merriweather',serif;font-size:1.2rem;margin-bottom:1rem}
-.cta-btn{display:inline-block;background:#27ae60;color:#fff;font-weight:700;font-size:.9rem;padding:.75rem 1.6rem;border-radius:4px;text-decoration:none}
-.cta-btn:hover{opacity:.9}
-.author-bio{margin-top:2.5rem;padding-top:2rem;border-top:2px solid #111;display:flex;gap:1.2rem}
-.av-lg{width:60px;height:60px;border-radius:50%;background:#e8e4de;display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:700;color:#888;flex-shrink:0}
-.bio-expert-tag{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c0392b}
-.bio-name{font-family:'Merriweather',serif;font-size:1.1rem;font-weight:700;margin:.2rem 0}
-.bio-title{font-size:.8rem;color:#888;font-style:italic;margin-bottom:.7rem}
-.bio-text{font-size:.85rem;color:#555;line-height:1.65;margin-bottom:.8rem}
-.bio-stats{display:flex;gap:1.5rem;flex-wrap:wrap}
-.bio-stat strong{display:block;font-family:'Merriweather',serif;font-size:1rem}
-.bio-stat span{font-size:.7rem;color:#aaa;text-transform:uppercase}
-.related{margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e8e8e8}
-.related-title{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#999;margin-bottom:1.2rem}
-.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.rel-card{text-decoration:none;color:inherit;border:1px solid #e8e8e8;border-radius:3px;overflow:hidden}
-.rel-img{aspect-ratio:16/9;background:#f5f2ee;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#ccc}
-.rel-body{padding:.8rem}
-.rel-cat{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c0392b}
-.rel-title{font-family:'Merriweather',serif;font-size:.82rem;font-weight:700;line-height:1.35;color:#111}
-aside .sb-title{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#999;padding-bottom:.5rem;margin-bottom:1rem;border-bottom:2px solid #111}
+.pc-box li{font-size:13px;color:#444;padding:5px 0;display:flex;gap:8px;border-bottom:1px solid #f0f0f0;line-height:1.5}
+.pc-box li:last-child{border-bottom:none}
+.pros li::before{content:'+';color:#111;font-weight:900;flex-shrink:0}
+.cons li::before{content:'-';color:#cc0000;font-weight:900;flex-shrink:0}
+.cta-box{background:#111;padding:20px 24px;margin:2rem 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.cta-left .cta-label{font-size:9px;font-weight:700;letter-spacing:.15em;color:#ea580c;display:block;margin-bottom:4px;text-transform:uppercase}
+.cta-left .cta-name{font-size:16px;font-weight:700;color:#fff}
+.cta-left .cta-tag{font-size:12px;color:#888;margin-top:2px}
+.cta-btn{background:#ea580c;color:#fff;padding:10px 24px;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.06em;white-space:nowrap}
+.cta-btn:hover{background:#cc0000}
+.author-bio{border-top:3px double #111;padding-top:1.5rem;margin-top:2.5rem;display:flex;gap:1.2rem;align-items:flex-start}
+.av-lg{width:52px;height:52px;border-radius:50%;background:#f0e8e0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#888;flex-shrink:0}
+.bio-expert-tag{font-size:8px;font-weight:700;letter-spacing:.18em;color:#ea580c;text-transform:uppercase;margin-bottom:3px}
+.bio-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#111;margin-bottom:2px}
+.bio-title{font-size:12px;color:#888;font-style:italic;margin-bottom:8px}
+.bio-text{font-size:13px;color:#555;line-height:1.65;margin-bottom:10px}
+.bio-stats{display:flex;gap:2rem;flex-wrap:wrap;padding-top:10px;border-top:1px solid #e0e0e0}
+.bio-stat strong{display:block;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#111}
+.bio-stat span{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.08em}
+.related{border-top:2px solid #111;padding-top:16px;margin-top:2.5rem}
+.related-title{font-size:9px;font-weight:700;letter-spacing:.18em;color:#888;text-transform:uppercase;margin-bottom:14px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.rel-card{text-decoration:none;color:inherit;padding:0 16px;border-right:1px solid #ddd}
+.rel-card:first-child{padding-left:0}
+.rel-card:last-child{border-right:none;padding-right:0}
+.rel-img{aspect-ratio:16/9;background:#f0e8e0;border:1px solid #ddd;margin-bottom:8px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#ccc}
+.rel-cat{font-size:8px;text-transform:uppercase;color:#cc0000;font-weight:700;display:block;margin-bottom:4px;letter-spacing:.1em}
+.rel-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#111;line-height:1.35}
+.rel-card:hover .rel-title{color:#cc0000}
+aside .sb-title{font-size:9px;font-weight:700;letter-spacing:.15em;color:#cc0000;text-transform:uppercase;border-bottom:2px solid #cc0000;padding-bottom:5px;margin-bottom:10px}
 .sb-posts{list-style:none}
-.sb-posts li{border-bottom:1px solid #f0f0f0}
-.sb-posts a{display:flex;gap:.7rem;padding:.65rem 0;text-decoration:none}
-.sb-rank{font-family:'Merriweather',serif;font-size:1rem;font-weight:700;color:#e8e8e2;width:20px}
-.sb-link-title{font-size:.8rem;font-weight:600;color:#222}
-.sb-link-meta{font-size:.68rem;color:#bbb}
-.tag-cloud{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
-.tag{background:#f5f5f3;border:1px solid #e8e8e8;color:#555;font-size:.72rem;padding:.25rem .65rem;border-radius:3px;text-decoration:none}
-.rank-entry{border:1px solid #e8e8e8;padding:1.5rem;margin-bottom:1.5rem}
-.rank-num{font-family:'Merriweather',serif;font-size:2rem;color:#c0392b;font-weight:700}
-.cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;padding:2rem 0 4rem}
-.cat-card{border:1px solid #e8e8e8;text-decoration:none;color:inherit;padding:1rem;display:grid;grid-template-columns:100px 1fr;gap:1rem}
-.cat-card:hover .cat-card-title{color:#c0392b}
-.cat-thumb{background:#f0ece6;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:#bbb}
-.cat-card-title{font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;line-height:1.35;margin-bottom:.3rem}
-.cat-card-excerpt{font-size:.8rem;color:#666;line-height:1.5}
-.cat-card-meta{font-size:.7rem;color:#bbb;margin-top:.4rem}
+.sb-posts li{display:flex;gap:6px;align-items:flex-start;padding:7px 0;border-bottom:1px solid #e8e8e8}
+.sb-posts a{display:flex;gap:6px;text-decoration:none;align-items:flex-start;width:100%}
+.sb-rank{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#e0ddd8;line-height:1;width:22px;flex-shrink:0}
+.sb-link-title{font-size:10px;font-weight:600;color:#222;line-height:1.3}
+.sb-posts a:hover .sb-link-title{color:#cc0000}
+.sb-link-meta{font-size:8px;color:#aaa;margin-top:2px}
+.newsletter-box{background:#111;padding:12px;margin-top:16px}
+.newsletter-title{font-size:9px;font-weight:700;color:#ea580c;letter-spacing:.15em;margin-bottom:4px;text-transform:uppercase}
+.newsletter-sub{font-size:9px;color:#888;margin-bottom:8px}
+.newsletter-btn{background:#ea580c;padding:6px;text-align:center;width:100%;font-size:9px;color:#fff;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;display:block;text-decoration:none}
+.newsletter-btn:hover{background:#cc0000}
+.tag-cloud{display:flex;flex-wrap:wrap;margin-top:4px}
+.tag{border:1px solid #ddd;padding:3px 8px;font-size:10px;color:#555;text-decoration:none;display:inline-block;margin:3px 2px}
+.tag:hover{background:#111;color:#fff;border-color:#111}
+.rank-entry{border-bottom:1px solid #e0e0e0;padding:16px 0;margin-bottom:0}
+.rank-num{font-family:'Playfair Display',serif;font-size:2rem;color:#cc0000;font-weight:900;line-height:1;margin-bottom:6px}
+.cat-hero{background:#111;padding:2.5rem 2rem;text-align:center;border-bottom:4px solid #ea580c}
+.cat-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:-.03em;margin-bottom:0}
+.cat-hero p{font-size:14px;color:rgba(255,255,255,.5);max-width:480px;margin:8px auto 0}
+.cat-list{max-width:1100px;margin:0 auto;padding:2rem}
+.cat-item{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid #e0e0e0;text-decoration:none;color:inherit}
+.cat-item:hover .cat-item-title{color:#cc0000}
+.cat-thumb{background:#f0e8e0;aspect-ratio:4/3;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:10px;color:#ccc}
+.cat-item-cat{font-size:7px;color:#cc0000;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:3px}
+.cat-item-title{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#111;line-height:1.25;letter-spacing:-.02em;margin-bottom:4px}
+.cat-item-meta{font-size:8px;color:#999;font-style:italic}
+.cat-item-excerpt{font-size:11px;color:#444;line-height:1.6;margin-top:4px}
 .page-main{padding:2.5rem 0 4rem;max-width:720px}
 .page-main.wide{max-width:100%}
 .form-group{margin-bottom:1rem}
-.form-group label{display:block;font-size:.8rem;font-weight:600;margin-bottom:.3rem}
-.form-group input,.form-group textarea{width:100%;padding:.6rem;border:1px solid #ddd;font-family:inherit;font-size:.9rem}
-.form-btn{background:#c0392b;color:#fff;border:none;padding:.7rem 1.4rem;font-weight:700;cursor:pointer;font-size:.9rem}
-.author-card{border:1px solid #e8e8e8;padding:1.5rem;margin-bottom:1.5rem}
-@media(max-width:900px){.article-grid{grid-template-columns:1fr}aside{display:none}.related-grid,.pc,.cat-grid{grid-template-columns:1fr}}
+.form-group label{display:block;font-size:12px;font-weight:600;margin-bottom:4px;color:#333}
+.form-group input,.form-group textarea{width:100%;padding:8px;border:1px solid #ddd;font-family:inherit;font-size:14px}
+.form-btn{background:#ea580c;color:#fff;border:none;padding:10px 20px;font-weight:700;cursor:pointer;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.form-btn:hover{background:#cc0000}
+.author-card{border-top:1px solid #e0e0e0;padding:1.5rem 0;margin-bottom:0}
+@media(max-width:1024px){.article-grid{grid-template-columns:1fr}aside{display:none}.related-grid{grid-template-columns:repeat(2,1fr)}.rel-card{border-right:none;padding:0 0 16px;margin-bottom:16px;border-bottom:1px solid #ddd}.rel-card:last-child{border-bottom:none}}
+@media(max-width:768px){.trust-bar{grid-template-columns:repeat(2,1fr)}.trust-cell:nth-child(2){border-right:none}.trust-cell:nth-child(3),.trust-cell:nth-child(4){border-top:1px solid #ddd}.pc{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr}.cat-item{grid-template-columns:90px 1fr}}
 </style>
 </head>
 <body>
-<div class="topbar"><p>Oberoende teknikjournalistik sedan 2023</p><span>ProjektorTips.se</span></div>
-<nav><div class="nav-top"><a class="brand" href="index.html">Projektor<span>Tips</span>.se</a><a class="nav-back" href="index.html">Tillbaka till bloggen</a></div><div class="cat-nav"><a href="index.html" class="active">Alla</a><a href="kategori-guider.html">Guider</a><a href="kategori-recensioner.html">Recensioner</a><a href="kategori-tips.html">Tips och tricks</a><a href="kategori-teknik.html">Teknik</a><a href="kategori-jamforelser.html">Jämförelser</a><a href="kategori-hemmabio.html">Hemmabio</a><a href="kategori-gaming.html">Gaming</a></div></nav>
-<div class="container page-main">
-<h1>Om ProjektorTips.se</h1>
+<div class="breaking-bar"><span class="breaking-label">SENASTE</span><span class="breaking-text">MiniLux Pro 2 testad: native 1080P och 390 ANSI lumen</span><span class="breaking-date">29 maj 2026</span></div><div class="compact-brand"><a href="index.html">PROJEKTORGUIDEN<span class="se">.SE</span></a></div><div class="cat-ribbon"><a href="index.html" class="active"><span>Alla</span></a><a href="kategori-guider.html"><span>Guider</span></a><a href="kategori-recensioner.html"><span>Recensioner</span></a><a href="kategori-tips.html"><span>Tips</span></a><a href="kategori-teknik.html"><span>Teknik</span></a><a href="kategori-jamforelser.html"><span>Jämförelser</span></a><a href="kategori-hemmabio.html"><span>Hemmabio</span></a><a href="kategori-gaming.html"><span>Gaming</span></a></div>
+<div class="container-narrow page-main">
+<h1>Om projektorguiden.se</h1>
 <p style="margin:1rem 0 2rem;color:#555">Vi är en oberoende svensk blogg om projektorer och hemmabio. Alla produkter vi recenserar köps med egna medel. Vi tar inte betalt för positiva omdömen.</p>
 <div class="author-card"><div class="author-bio" style="border:none;padding:0;margin:0"><div class="av-lg">EL</div><div>
 <div class="bio-expert-tag">Teknikskribent</div>
 <div class="bio-name">Erik Lindström</div>
-<div class="bio-title">Teknikskribent, ProjektorTips.se</div>
+<div class="bio-title">Teknikskribent, projektorguiden.se</div>
 <p class="bio-text">Erik Lindström har 11 års erfarenhet som teknikskribent. Han var tidigare redaktör på Råd och Rön Teknik och bidragsskribent för Elektroniktidningen. Han köper alltid produkter med egna medel och tar inga sponsrade uppdrag.</p>
 <div class="bio-stats">
 <div class="bio-stat"><strong>11 år</strong><span>Erfarenhet</span></div>
@@ -148,7 +187,7 @@ aside .sb-title{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-trans
 <div class="author-card"><div class="author-bio" style="border:none;padding:0;margin:0"><div class="av-lg">AS</div><div>
 <div class="bio-expert-tag">Köpguider</div>
 <div class="bio-name">Anna Svensson</div>
-<div class="bio-title">Teknikskribent, ProjektorTips.se</div>
+<div class="bio-title">Teknikskribent, projektorguiden.se</div>
 <p class="bio-text">Anna Svensson är teknikskribent med 7 års erfarenhet och utbildning inom medie- och kommunikationsvetenskap. Hon specialiserar sig på köpguider och konsumentvägledning för familjer och förstagångsköpare.</p>
 <div class="bio-stats">
 <div class="bio-stat"><strong>7 år</strong><span>Erfarenhet</span></div>
@@ -158,7 +197,7 @@ aside .sb-title{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-trans
 <div class="author-card"><div class="author-bio" style="border:none;padding:0;margin:0"><div class="av-lg">PB</div><div>
 <div class="bio-expert-tag">Teknikexpert</div>
 <div class="bio-name">Per Bergman</div>
-<div class="bio-title">Seniorskribent, ProjektorTips.se</div>
+<div class="bio-title">Seniorskribent, projektorguiden.se</div>
 <p class="bio-text">Per Bergman är seniorskribent med 9 års erfarenhet av konsumentelektronik. Han har tidigare arbetat som AV-tekniker och teknikskribent för svenska konsumenttidningar, och specialiserar sig på bildteknik och projektionsteknik. Alla produkter köps med egna medel.</p>
 <div class="bio-stats">
 <div class="bio-stat"><strong>9 år</strong><span>Erfarenhet</span></div>
@@ -167,26 +206,26 @@ aside .sb-title{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-trans
 </div></div></div></div>
 </div>
 <footer><div class="footer-inner"><div class="footer-grid">
-<div><div class="footer-brand">Projektor<span>Tips</span>.se</div>
-<p class="footer-about">Oberoende blogg om projektorer och hemmabio sedan 2023. Vi testar och granskar utan koppling till någon butik eller tillverkare.</p></div>
-<div class="footer-col"><h4>Populära artiklar</h4><ul>
-<li><a href="minilux-pro-recension.html">MiniLux Pro recension</a></li>
-<li><a href="minilux-pro-2-recension.html">MiniLux Pro 2 recension</a></li>
-<li><a href="minilux-pro-2-vs-pro.html">MiniLux Pro 2 vs Pro</a></li>
-<li><a href="basta-projektorer-2026.html">Bästa projektorer 2026</a></li>
-<li><a href="varfor-kopa-projektor.html">Varför välja projektor</a></li>
-<li><a href="ansi-lumen-guide.html">ANSI Lumen förklarat</a></li>
-</ul></div>
-<div class="footer-col"><h4>Kategorier</h4><ul>
-<li><a href="kategori-guider.html">Guider</a></li>
-<li><a href="kategori-recensioner.html">Recensioner</a></li>
-<li><a href="kategori-tips.html">Tips och tricks</a></li>
-<li><a href="kategori-teknik.html">Teknik</a></li>
-<li><a href="kategori-jamforelser.html">Jämförelser</a></li>
-<li><a href="kategori-hemmabio.html">Hemmabio</a></li>
-</ul></div></div>
+<div><div class="footer-brand">PROJEKTORGUIDEN<span class="se">.SE</span></div>
+<p class="footer-about">Oberoende teknikblogg om projektorer sedan 2023. Vi testar och granskar utan koppling till butiker.</p></div>
+<div class="footer-col"><h4>Populära artiklar</h4>
+<a href="minilux-pro-recension.html">MiniLux Pro recension</a>
+<a href="minilux-pro-2-recension.html">MiniLux Pro 2 recension</a>
+<a href="basta-projektorer-2026.html">Bästa projektorer 2026</a>
+<a href="varfor-kopa-projektor.html">Varför välja projektor</a>
+<a href="ansi-lumen-guide.html">ANSI Lumen förklarat</a>
+<a href="minilux-pro-2-vs-pro.html">MiniLux Pro vs Pro 2</a>
+</div>
+<div class="footer-col"><h4>Kategorier</h4>
+<a href="kategori-guider.html">Guider</a>
+<a href="kategori-recensioner.html">Recensioner</a>
+<a href="kategori-tips.html">Tips</a>
+<a href="kategori-teknik.html">Teknik</a>
+<a href="kategori-jamforelser.html">Jämförelser</a>
+<a href="kategori-hemmabio.html">Hemmabio</a>
+</div></div>
 <div class="footer-bottom">
-<p>&copy; 2026 ProjektorTips.se</p>
-<p><a href="om-oss.html">Om oss</a> &nbsp;·&nbsp; <a href="kontakt.html">Kontakt</a> &nbsp;·&nbsp; <a href="integritetspolicy.html">Integritetspolicy</a></p>
+<p>&copy; 2026 projektorguiden.se — Oberoende granskning</p>
+<p><a href="om-oss.html">Om oss</a> · <a href="kontakt.html">Kontakt</a> · <a href="integritetspolicy.html">Integritetspolicy</a></p>
 </div></div></footer>
 </body></html>

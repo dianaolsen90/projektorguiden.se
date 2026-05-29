@@ -1,4 +1,4 @@
-import { writeFileSync } from "fs";
+﻿import { writeFileSync } from "fs";
 
 const PRO1_URL =
   "https://miniprojektor.se/products/minilux-pro-smart-miniprojektor";
@@ -7,234 +7,315 @@ const PRO2_URL =
 
 const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>`;
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"/>`;
+
+const TODAY = "29 maj 2026";
 
 const BASE_CSS = `
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{background:#fff;color:#111;font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.topbar{background:#f2f2f2;border-bottom:1px solid #e4e4e4;padding:.4rem 2rem;display:flex;justify-content:space-between;align-items:center}
-.topbar p,.topbar span,.topbar-right{font-size:.72rem;color:#888}
-nav{border-bottom:2px solid #111;padding:0 2rem;background:#fff;position:sticky;top:0;z-index:100}
-.nav-top{display:flex;align-items:center;justify-content:space-between;height:62px}
-.brand{font-family:'Merriweather',serif;font-size:1.5rem;font-weight:700;color:#111;text-decoration:none;letter-spacing:-.02em}
-.brand span{color:#c0392b}
-.nav-search input{border:1px solid #ddd;border-radius:4px;padding:.3rem .7rem;font-size:.8rem;font-family:'Inter',sans-serif;outline:none;width:180px}
-.nav-back{font-size:.82rem;font-weight:600;color:#555;text-decoration:none}
-.nav-back:hover{color:#111}
-.cat-nav{display:flex;gap:0;border-top:1px solid #e8e8e8;overflow-x:auto}
-.cat-nav a{font-size:.78rem;font-weight:600;color:#444;text-decoration:none;padding:.6rem 1.1rem;white-space:nowrap;border-bottom:2px solid transparent;transition:all .15s;text-transform:uppercase;letter-spacing:.04em}
-.cat-nav a:hover{color:#111;border-bottom-color:#111}
-.cat-nav a.active{color:#c0392b;border-bottom-color:#c0392b}
-.container{max-width:1100px;margin:0 auto;padding:0 2rem}
-footer{background:#111;color:#fff;padding:3rem 2rem 2rem}
+body{background:#fff;color:#111;font-family:'Source Sans 3',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.breaking-bar{height:28px;background:#cc0000;display:flex;align-items:center;padding:0 2rem;gap:20px}
+.breaking-label{background:#fff;color:#cc0000;font-size:8px;font-weight:900;letter-spacing:.2em;padding:2px 8px;flex-shrink:0}
+.breaking-text{font-size:10px;color:rgba(255,255,255,.85);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.breaking-date{font-size:9px;color:rgba(255,255,255,.5);margin-left:auto;flex-shrink:0}
+.masthead{text-align:center;padding:16px 2rem 12px;border-bottom:4px double #111}
+.masthead-name{font-family:'Playfair Display',serif;font-size:clamp(28px,6vw,52px);font-weight:900;color:#111;letter-spacing:-.04em;text-transform:uppercase;line-height:1;text-decoration:none;display:block}
+.masthead-name .se{color:#ea580c}
+.masthead-rule{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:8px}
+.masthead-rule::before,.masthead-rule::after{content:'';flex:1;height:1px;background:#ccc;max-width:200px}
+.masthead-tagline{font-size:9px;letter-spacing:.25em;color:#888;text-transform:uppercase;white-space:nowrap}
+.compact-brand{padding:10px 2rem;border-bottom:1px solid #ddd}
+.compact-brand a{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#111;text-decoration:none;letter-spacing:-.03em;text-transform:uppercase}
+.compact-brand a .se{color:#ea580c}
+.cat-ribbon{display:flex;border-top:2px solid #111;border-bottom:2px solid #111;overflow-x:auto;background:#fff;position:sticky;top:0;z-index:100}
+.cat-ribbon a{text-decoration:none;display:flex;align-items:center;flex-shrink:0}
+.cat-ribbon a:first-child{background:#111;padding:7px 16px}
+.cat-ribbon a:first-child span{font-size:10px;color:#fff;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.cat-ribbon a:not(:first-child){padding:7px 14px;border-right:1px solid #ddd}
+.cat-ribbon a:not(:first-child) span{font-size:10px;color:#111;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.cat-ribbon a:not(:first-child):hover{background:#f5f5f5}
+.cat-ribbon a.active{background:#ea580c}
+.cat-ribbon a.active span{color:#fff}
+.container{max-width:1160px;margin:0 auto;padding:0 2rem}
+.container-narrow{max-width:1100px;margin:0 auto;padding:0 2rem}
+footer{background:#111;color:#fff;padding:3rem 2rem 2rem;border-top:4px solid #ea580c}
 .footer-inner{max-width:1100px;margin:0 auto}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
-.footer-brand{font-family:'Merriweather',serif;font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:.6rem}
-.footer-brand span{color:#c0392b}
-.footer-about{font-size:.82rem;color:#888;line-height:1.65;max-width:260px}
-.footer-col h4{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#555;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid #333}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-bottom:2rem}
+.footer-brand{font-family:'Playfair Display',serif;font-size:22px;color:#fff;font-weight:900;margin-bottom:6px}
+.footer-brand .se{color:#ea580c}
+.footer-about{font-size:12px;color:#888;margin-top:6px;max-width:240px;line-height:1.6}
+.footer-col h4{font-size:9px;font-weight:700;letter-spacing:.18em;color:#ea580c;text-transform:uppercase;border-bottom:1px solid #333;padding-bottom:8px;margin-bottom:12px}
 .footer-col ul{list-style:none}
-.footer-col li{margin-bottom:.5rem}
-.footer-col a{font-size:.83rem;color:#888;text-decoration:none}
+.footer-col a{font-size:12px;color:#888;text-decoration:none;display:block;margin-bottom:7px}
 .footer-col a:hover{color:#fff}
-.footer-bottom{padding-top:1.5rem;border-top:1px solid #222;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
-.footer-bottom p{font-size:.75rem;color:#555}
-.footer-bottom a{color:#888;text-decoration:none}
+.footer-bottom{border-top:1px solid #222;padding-top:1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.footer-bottom p,.footer-bottom a{font-size:11px;color:#555;text-decoration:none}
 .footer-bottom a:hover{color:#fff}
-@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:580px){.footer-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr}.breaking-text{max-width:180px}}
 `;
 
 const ARTICLE_CSS = `
-.article-grid{display:grid;grid-template-columns:1fr 280px;gap:4rem;padding:2.5rem 0 5rem}
-.art-cat{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c0392b;margin-bottom:.6rem}
-h1{font-family:'Merriweather',serif;font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:700;line-height:1.25;color:#111;margin-bottom:.8rem}
-.art-intro{font-family:'Merriweather',serif;font-style:italic;font-size:1rem;color:#555;line-height:1.75;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid #e8e8e8}
-.art-meta{display:flex;align-items:center;gap:.5rem;font-size:.73rem;color:#aaa;margin-bottom:1rem;flex-wrap:wrap}
-.dot{width:3px;height:3px;border-radius:50%;background:#ccc;display:inline-block}
-.trust-bar{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;font-size:.72rem;color:#666;margin-bottom:1.5rem;padding:.8rem 1rem;background:#fafaf8;border:1px solid #e8e8e8}
-.trust-bar span{display:flex;align-items:center;gap:.35rem}
-.trust-bar span::before{content:'';width:6px;height:6px;border-radius:50%;background:#27ae60}
-.art-img{background:#f0ece6;border-radius:4px;aspect-ratio:16/7;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:#bbb;margin-bottom:2rem}
-.body{font-size:.98rem;color:#222;line-height:1.85}
+.article-grid{display:grid;grid-template-columns:1fr 220px;gap:3rem;padding:2rem 0 4rem}
+.art-header{border-bottom:2px solid #111;padding-bottom:14px;margin-bottom:20px}
+.art-cat{background:#ea580c;display:inline-block;padding:3px 8px;margin-bottom:8px;font-size:9px;color:#fff;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.art-cat.cat-dark{background:#111}
+h1{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,44px);font-weight:900;color:#111;line-height:1.1;letter-spacing:-.03em;margin-bottom:10px}
+.art-intro{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:#555;line-height:1.65;margin-bottom:14px}
+.art-meta{display:flex;align-items:center;gap:8px;font-size:11px;color:#888;flex-wrap:wrap}
+.art-meta strong{font-weight:600;color:#333}
+.meta-sep{color:#ccc}
+.meta-rule{border:none;border-top:1px solid #ddd;margin-top:12px}
+.trust-bar{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #ddd;margin:16px 0}
+.trust-cell{padding:10px 14px;border-right:1px solid #ddd;text-align:center}
+.trust-cell:last-child{border-right:none}
+.trust-icon{font-size:1.1rem;display:block;margin-bottom:3px}
+.trust-cell strong{font-size:12px;font-weight:700;color:#111;display:block}
+.trust-cell span{font-size:10px;color:#888}
+.art-img{aspect-ratio:16/7;background:#f0e8e0;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:12px;color:#bbb;margin-bottom:1.5rem}
+.body{font-family:'Source Sans 3',sans-serif;font-size:16px;color:#2a2a2a;line-height:1.85}
 .body p{margin-bottom:1.2rem}
-.body h2{font-family:'Merriweather',serif;font-size:1.25rem;font-weight:700;margin:2.2rem 0 .7rem;color:#111}
+.body h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#111;border-bottom:1px solid #e0e0e0;padding-bottom:6px;margin:2rem 0 .8rem}
 .body ul,.body ol{padding-left:1.4rem;margin-bottom:1.2rem}
 .body li{margin-bottom:.5rem}
-.body a{color:#c0392b}
-.callout{background:#fafaf8;border-left:3px solid #c0392b;padding:.9rem 1.2rem;margin:1.5rem 0}
-.callout p{margin:0;font-size:.9rem;color:#555;font-style:italic}
-.spec-tbl,.cmp-tbl{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.88rem;border:1px solid #e8e8e8}
-.spec-tbl td,.cmp-tbl td,.cmp-tbl th{padding:.6rem .9rem;border-bottom:1px solid #f0f0f0;color:#444}
-.spec-tbl td:first-child,.cmp-tbl th{background:#fafaf8;font-weight:600;color:#111}
-.score-box{background:#fafaf8;border:1px solid #e8e8e8;padding:1.4rem;margin:1.5rem 0}
-.score-row{display:flex;align-items:center;gap:1rem;margin-bottom:.7rem}
-.score-lbl{font-size:.8rem;width:170px;flex-shrink:0}
-.score-bar{flex:1;background:#e8e8e4;border-radius:2px;height:4px;overflow:hidden}
-.score-fill{height:100%;background:#c0392b}
-.score-val{font-size:.8rem;font-weight:600;width:26px;text-align:right}
-.score-total{margin-top:1rem;padding-top:1rem;border-top:1px solid #e8e8e8;display:flex;align-items:baseline;gap:.5rem}
-.score-num{font-family:'Merriweather',serif;font-size:2.5rem;font-weight:700}
-.pc{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
-.pc-box{border:1px solid #e8e8e8;padding:1.1rem}
-.pc-box h4{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.7rem}
-.pros h4{color:#27ae60}.cons h4{color:#c0392b}
+.body a{color:#cc0000;text-decoration:underline}
+.callout{border-left:4px solid #ea580c;padding:10px 14px;background:#fffaf7;margin:1.5rem 0}
+.callout p{margin:0;font-size:14px;color:#555;line-height:1.7;font-style:italic}
+.spec-tbl,.cmp-tbl{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:13px;border:1px solid #ddd}
+.cmp-tbl th,.spec-tbl th{background:#111;color:#fff;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:8px 12px;text-align:left}
+.spec-tbl td,.cmp-tbl td{padding:8px 12px;border-bottom:1px solid #eee;color:#444}
+.spec-tbl td:first-child,.cmp-tbl td:first-child{font-weight:600;color:#111;background:#fafafa;width:45%}
+.cmp-tbl tr:last-child td,.spec-tbl tr:last-child td{border-bottom:none}
+.score-box{border:1px solid #ddd;padding:1.2rem;margin:1.5rem 0}
+.score-title{font-size:9px;font-weight:700;letter-spacing:.15em;color:#888;text-transform:uppercase;border-bottom:1px solid #eee;padding-bottom:8px;margin-bottom:12px}
+.score-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.score-lbl{font-size:13px;color:#555;width:160px;flex-shrink:0}
+.score-bar{flex:1;background:#e8e8e4;height:3px;overflow:hidden}
+.score-fill{height:100%;background:#cc0000}
+.score-val{font-size:13px;font-weight:700;width:28px;text-align:right}
+.score-total{display:flex;align-items:baseline;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid #eee}
+.score-num{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:#111}
+.score-stars{color:#ea580c;font-size:14px}
+.score-label{font-size:12px;color:#888}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:1.5rem 0}
+.pc-box{padding-top:10px}
+.pros{border-top:3px solid #111}
+.cons{border-top:3px solid #cc0000}
+.pc-box h4{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
+.pros h4{color:#111}.cons h4{color:#cc0000}
 .pc-box ul{list-style:none}
-.pc-box li{font-size:.83rem;padding:.32rem 0;display:flex;gap:.5rem;border-bottom:1px solid #f5f5f5}
-.pros li::before{content:'✓';color:#27ae60;font-weight:700}
-.cons li::before{content:'✗';color:#c0392b;font-weight:700}
-.cta-box{background:#111;color:#fff;padding:2rem;margin:2rem 0;text-align:center;border-radius:4px}
-.cta-box h3{font-family:'Merriweather',serif;font-size:1.2rem;margin-bottom:1rem}
-.cta-btn{display:inline-block;background:#27ae60;color:#fff;font-weight:700;font-size:.9rem;padding:.75rem 1.6rem;border-radius:4px;text-decoration:none}
-.cta-btn:hover{opacity:.9}
-.author-bio{margin-top:2.5rem;padding-top:2rem;border-top:2px solid #111;display:flex;gap:1.2rem}
-.av-lg{width:60px;height:60px;border-radius:50%;background:#e8e4de;display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:700;color:#888;flex-shrink:0}
-.bio-expert-tag{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c0392b}
-.bio-name{font-family:'Merriweather',serif;font-size:1.1rem;font-weight:700;margin:.2rem 0}
-.bio-title{font-size:.8rem;color:#888;font-style:italic;margin-bottom:.7rem}
-.bio-text{font-size:.85rem;color:#555;line-height:1.65;margin-bottom:.8rem}
-.bio-stats{display:flex;gap:1.5rem;flex-wrap:wrap}
-.bio-stat strong{display:block;font-family:'Merriweather',serif;font-size:1rem}
-.bio-stat span{font-size:.7rem;color:#aaa;text-transform:uppercase}
-.related{margin-top:2.5rem;padding-top:2rem;border-top:1px solid #e8e8e8}
-.related-title{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#999;margin-bottom:1.2rem}
-.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.rel-card{text-decoration:none;color:inherit;border:1px solid #e8e8e8;border-radius:3px;overflow:hidden}
-.rel-img{aspect-ratio:16/9;background:#f5f2ee;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#ccc}
-.rel-body{padding:.8rem}
-.rel-cat{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c0392b}
-.rel-title{font-family:'Merriweather',serif;font-size:.82rem;font-weight:700;line-height:1.35;color:#111}
-aside .sb-title{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#999;padding-bottom:.5rem;margin-bottom:1rem;border-bottom:2px solid #111}
+.pc-box li{font-size:13px;color:#444;padding:5px 0;display:flex;gap:8px;border-bottom:1px solid #f0f0f0;line-height:1.5}
+.pc-box li:last-child{border-bottom:none}
+.pros li::before{content:'+';color:#111;font-weight:900;flex-shrink:0}
+.cons li::before{content:'-';color:#cc0000;font-weight:900;flex-shrink:0}
+.cta-box{background:#111;padding:20px 24px;margin:2rem 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.cta-left .cta-label{font-size:9px;font-weight:700;letter-spacing:.15em;color:#ea580c;display:block;margin-bottom:4px;text-transform:uppercase}
+.cta-left .cta-name{font-size:16px;font-weight:700;color:#fff}
+.cta-left .cta-tag{font-size:12px;color:#888;margin-top:2px}
+.cta-btn{background:#ea580c;color:#fff;padding:10px 24px;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.06em;white-space:nowrap}
+.cta-btn:hover{background:#cc0000}
+.author-bio{border-top:3px double #111;padding-top:1.5rem;margin-top:2.5rem;display:flex;gap:1.2rem;align-items:flex-start}
+.av-lg{width:52px;height:52px;border-radius:50%;background:#f0e8e0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#888;flex-shrink:0}
+.bio-expert-tag{font-size:8px;font-weight:700;letter-spacing:.18em;color:#ea580c;text-transform:uppercase;margin-bottom:3px}
+.bio-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#111;margin-bottom:2px}
+.bio-title{font-size:12px;color:#888;font-style:italic;margin-bottom:8px}
+.bio-text{font-size:13px;color:#555;line-height:1.65;margin-bottom:10px}
+.bio-stats{display:flex;gap:2rem;flex-wrap:wrap;padding-top:10px;border-top:1px solid #e0e0e0}
+.bio-stat strong{display:block;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#111}
+.bio-stat span{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.08em}
+.related{border-top:2px solid #111;padding-top:16px;margin-top:2.5rem}
+.related-title{font-size:9px;font-weight:700;letter-spacing:.18em;color:#888;text-transform:uppercase;margin-bottom:14px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.rel-card{text-decoration:none;color:inherit;padding:0 16px;border-right:1px solid #ddd}
+.rel-card:first-child{padding-left:0}
+.rel-card:last-child{border-right:none;padding-right:0}
+.rel-img{aspect-ratio:16/9;background:#f0e8e0;border:1px solid #ddd;margin-bottom:8px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#ccc}
+.rel-cat{font-size:8px;text-transform:uppercase;color:#cc0000;font-weight:700;display:block;margin-bottom:4px;letter-spacing:.1em}
+.rel-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#111;line-height:1.35}
+.rel-card:hover .rel-title{color:#cc0000}
+aside .sb-title{font-size:9px;font-weight:700;letter-spacing:.15em;color:#cc0000;text-transform:uppercase;border-bottom:2px solid #cc0000;padding-bottom:5px;margin-bottom:10px}
 .sb-posts{list-style:none}
-.sb-posts li{border-bottom:1px solid #f0f0f0}
-.sb-posts a{display:flex;gap:.7rem;padding:.65rem 0;text-decoration:none}
-.sb-rank{font-family:'Merriweather',serif;font-size:1rem;font-weight:700;color:#e8e8e2;width:20px}
-.sb-link-title{font-size:.8rem;font-weight:600;color:#222}
-.sb-link-meta{font-size:.68rem;color:#bbb}
-.tag-cloud{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
-.tag{background:#f5f5f3;border:1px solid #e8e8e8;color:#555;font-size:.72rem;padding:.25rem .65rem;border-radius:3px;text-decoration:none}
-.rank-entry{border:1px solid #e8e8e8;padding:1.5rem;margin-bottom:1.5rem}
-.rank-num{font-family:'Merriweather',serif;font-size:2rem;color:#c0392b;font-weight:700}
-.cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;padding:2rem 0 4rem}
-.cat-card{border:1px solid #e8e8e8;text-decoration:none;color:inherit;padding:1rem;display:grid;grid-template-columns:100px 1fr;gap:1rem}
-.cat-card:hover .cat-card-title{color:#c0392b}
-.cat-thumb{background:#f0ece6;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:#bbb}
-.cat-card-title{font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;line-height:1.35;margin-bottom:.3rem}
-.cat-card-excerpt{font-size:.8rem;color:#666;line-height:1.5}
-.cat-card-meta{font-size:.7rem;color:#bbb;margin-top:.4rem}
+.sb-posts li{display:flex;gap:6px;align-items:flex-start;padding:7px 0;border-bottom:1px solid #e8e8e8}
+.sb-posts a{display:flex;gap:6px;text-decoration:none;align-items:flex-start;width:100%}
+.sb-rank{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#e0ddd8;line-height:1;width:22px;flex-shrink:0}
+.sb-link-title{font-size:10px;font-weight:600;color:#222;line-height:1.3}
+.sb-posts a:hover .sb-link-title{color:#cc0000}
+.sb-link-meta{font-size:8px;color:#aaa;margin-top:2px}
+.newsletter-box{background:#111;padding:12px;margin-top:16px}
+.newsletter-title{font-size:9px;font-weight:700;color:#ea580c;letter-spacing:.15em;margin-bottom:4px;text-transform:uppercase}
+.newsletter-sub{font-size:9px;color:#888;margin-bottom:8px}
+.newsletter-btn{background:#ea580c;padding:6px;text-align:center;width:100%;font-size:9px;color:#fff;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;display:block;text-decoration:none}
+.newsletter-btn:hover{background:#cc0000}
+.tag-cloud{display:flex;flex-wrap:wrap;margin-top:4px}
+.tag{border:1px solid #ddd;padding:3px 8px;font-size:10px;color:#555;text-decoration:none;display:inline-block;margin:3px 2px}
+.tag:hover{background:#111;color:#fff;border-color:#111}
+.rank-entry{border-bottom:1px solid #e0e0e0;padding:16px 0;margin-bottom:0}
+.rank-num{font-family:'Playfair Display',serif;font-size:2rem;color:#cc0000;font-weight:900;line-height:1;margin-bottom:6px}
+.cat-hero{background:#111;padding:2.5rem 2rem;text-align:center;border-bottom:4px solid #ea580c}
+.cat-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:-.03em;margin-bottom:0}
+.cat-hero p{font-size:14px;color:rgba(255,255,255,.5);max-width:480px;margin:8px auto 0}
+.cat-list{max-width:1100px;margin:0 auto;padding:2rem}
+.cat-item{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid #e0e0e0;text-decoration:none;color:inherit}
+.cat-item:hover .cat-item-title{color:#cc0000}
+.cat-thumb{background:#f0e8e0;aspect-ratio:4/3;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:10px;color:#ccc}
+.cat-item-cat{font-size:7px;color:#cc0000;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:3px}
+.cat-item-title{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#111;line-height:1.25;letter-spacing:-.02em;margin-bottom:4px}
+.cat-item-meta{font-size:8px;color:#999;font-style:italic}
+.cat-item-excerpt{font-size:11px;color:#444;line-height:1.6;margin-top:4px}
 .page-main{padding:2.5rem 0 4rem;max-width:720px}
 .page-main.wide{max-width:100%}
 .form-group{margin-bottom:1rem}
-.form-group label{display:block;font-size:.8rem;font-weight:600;margin-bottom:.3rem}
-.form-group input,.form-group textarea{width:100%;padding:.6rem;border:1px solid #ddd;font-family:inherit;font-size:.9rem}
-.form-btn{background:#c0392b;color:#fff;border:none;padding:.7rem 1.4rem;font-weight:700;cursor:pointer;font-size:.9rem}
-.author-card{border:1px solid #e8e8e8;padding:1.5rem;margin-bottom:1.5rem}
-@media(max-width:900px){.article-grid{grid-template-columns:1fr}aside{display:none}.related-grid,.pc,.cat-grid{grid-template-columns:1fr}}
+.form-group label{display:block;font-size:12px;font-weight:600;margin-bottom:4px;color:#333}
+.form-group input,.form-group textarea{width:100%;padding:8px;border:1px solid #ddd;font-family:inherit;font-size:14px}
+.form-btn{background:#ea580c;color:#fff;border:none;padding:10px 20px;font-weight:700;cursor:pointer;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.form-btn:hover{background:#cc0000}
+.author-card{border-top:1px solid #e0e0e0;padding:1.5rem 0;margin-bottom:0}
+@media(max-width:1024px){.article-grid{grid-template-columns:1fr}aside{display:none}.related-grid{grid-template-columns:repeat(2,1fr)}.rel-card{border-right:none;padding:0 0 16px;margin-bottom:16px;border-bottom:1px solid #ddd}.rel-card:last-child{border-bottom:none}}
+@media(max-width:768px){.trust-bar{grid-template-columns:repeat(2,1fr)}.trust-cell:nth-child(2){border-right:none}.trust-cell:nth-child(3),.trust-cell:nth-child(4){border-top:1px solid #ddd}.pc{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr}.cat-item{grid-template-columns:90px 1fr}}
 `;
 
 const INDEX_CSS = `
-.main-grid{display:grid;grid-template-columns:1fr 300px;gap:3.5rem;padding:2.5rem 0 4rem}
-.featured{margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid #e8e8e8}
-.featured-img{background:#f0ece6;border-radius:4px;aspect-ratio:16/7;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:#bbb;margin-bottom:1.2rem}
-.feat-meta{display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem}
-.cat-label{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c0392b}
-.meta-date{font-size:.73rem;color:#aaa}
-.featured h2{font-family:'Merriweather',serif;font-size:1.9rem;font-weight:700;line-height:1.25;color:#111;margin-bottom:.8rem}
-.featured p{font-size:.95rem;color:#555;line-height:1.75;margin-bottom:1rem}
-.read-more{font-size:.82rem;font-weight:600;color:#111;text-decoration:none;border-bottom:1px solid #111;padding-bottom:.1rem}
-.read-more:hover{color:#c0392b;border-color:#c0392b}
-.feat-author{display:flex;align-items:center;gap:.6rem;margin-top:1rem}
-.av{width:28px;height:28px;border-radius:50%;background:#e8e4de;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:#888}
-.feat-author-txt{font-size:.77rem;color:#888}
-.feat-author-txt strong{color:#333;font-weight:600}
-.post-list{display:flex;flex-direction:column}
-.post-item{display:grid;grid-template-columns:120px 1fr;gap:1.2rem;padding:1.3rem 0;border-bottom:1px solid #f0f0f0;text-decoration:none;color:inherit}
-.post-item:hover .post-item-title{color:#c0392b}
-.post-thumb{background:#f0ece6;border-radius:3px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:#bbb}
-.pt-guide{background:#eef3ee}.pt-tips{background:#f7f4ee}.pt-tech{background:#eef0f8}.pt-jmf{background:#f7eeee}.pt-rec{background:#f0eef7}
-.post-item-cat{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c0392b;margin-bottom:.3rem}
-.post-item-title{font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;line-height:1.35;color:#111;margin-bottom:.3rem}
-.post-item-excerpt{font-size:.8rem;color:#666;line-height:1.55}
-.post-item-meta{font-size:.7rem;color:#bbb;margin-top:.4rem}
-.about-box{background:#fafaf8;border:1px solid #e8e8e8;border-left:3px solid #c0392b;padding:1.2rem}
-.about-box p{font-size:.83rem;color:#666;line-height:1.6}
-@media(max-width:900px){.main-grid{grid-template-columns:1fr}aside{display:none}}
-@media(max-width:580px){.post-item{grid-template-columns:90px 1fr}.featured h2{font-size:1.4rem}}
+.paper-grid{display:grid;grid-template-columns:1.8fr 1px 1.3fr 1px 0.9fr;padding:16px 0}
+.col-divider{background:#ddd}
+.col-main{padding:0 20px 0 0}
+.hero-img{background:#f0e8e0;aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;font-size:11px;color:#ccc;margin-bottom:10px}
+.cat-label{background:#ea580c;display:inline;padding:2px 6px;font-size:8px;color:#fff;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.main-headline{font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,28px);font-weight:900;color:#111;line-height:1.1;letter-spacing:-.03em;margin-top:6px;margin-bottom:6px}
+.main-byline{font-size:9px;color:#888;font-style:italic;margin-bottom:6px}
+.main-excerpt{font-size:11px;color:#444;line-height:1.6;margin-top:6px;margin-bottom:8px}
+.read-more{font-size:10px;color:#cc0000;font-weight:700;text-decoration:none;text-transform:uppercase;letter-spacing:.08em}
+.read-more:hover{text-decoration:underline}
+.col-secondary{padding:0 16px;display:flex;flex-direction:column}
+.sec-story{padding-bottom:12px;border-bottom:1px solid #e0e0e0;margin-bottom:12px;text-decoration:none;color:inherit;display:block}
+.sec-story:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.sec-cat{font-size:7px;color:#cc0000;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:3px}
+.sec-headline{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#111;line-height:1.25;letter-spacing:-.02em}
+.sec-byline{font-size:8px;color:#999;margin-top:4px}
+.sec-story:hover .sec-headline{color:#cc0000}
+.col-sidebar{padding:0 0 0 16px}
+.section-rule{border:none;border-top:1px solid #ddd;margin:8px 0}
+.more-section{padding:16px 0 4rem}
+.more-label{font-size:9px;font-weight:700;letter-spacing:.15em;color:#888;text-transform:uppercase;border-bottom:1px solid #e0e0e0;padding-bottom:6px;margin-bottom:12px}
+.more-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.more-item{padding:0 16px 0 0;border-right:1px solid #e0e0e0;text-decoration:none;color:inherit;display:block}
+.more-item:last-child{border-right:none}
+.more-cat{font-size:7px;text-transform:uppercase;font-weight:700;letter-spacing:.1em}
+.more-cat.cat-guide{color:#ea580c}.more-cat.cat-rec{color:#cc0000}.more-cat.cat-tech{color:#111}.more-cat.cat-tips{color:#444}.more-cat.cat-jmf{color:#ea580c}.more-cat.cat-game{color:#111}
+.more-headline{font-family:'Playfair Display',serif;font-size:11px;font-weight:700;line-height:1.3;color:#111;margin-top:3px}
+.more-author{font-size:8px;color:#aaa;margin-top:3px}
+.more-item:hover .more-headline{color:#cc0000}
+@media(max-width:1024px){.paper-grid{grid-template-columns:1fr 1px 0.9fr}.col-secondary{display:none}.col-divider:nth-child(2){display:none}.col-main{padding-right:0}.more-grid{grid-template-columns:repeat(2,1fr)}.more-item:nth-child(2){border-right:none}.more-item:nth-child(3),.more-item:nth-child(4){border-top:1px solid #e0e0e0;padding-top:12px;margin-top:12px}}
+@media(max-width:768px){.paper-grid{grid-template-columns:1fr}.col-divider{display:none}.col-sidebar{display:none}.more-grid{grid-template-columns:1fr}.more-item{border-right:none;border-bottom:1px solid #e0e0e0;padding-bottom:12px;margin-bottom:12px}.more-item:last-child{border-bottom:none}}
 `;
 
 const cats = [
   ["index.html", "Alla"],
   ["kategori-guider.html", "Guider"],
   ["kategori-recensioner.html", "Recensioner"],
-  ["kategori-tips.html", "Tips och tricks"],
+  ["kategori-tips.html", "Tips"],
   ["kategori-teknik.html", "Teknik"],
   ["kategori-jamforelser.html", "Jämförelser"],
   ["kategori-hemmabio.html", "Hemmabio"],
   ["kategori-gaming.html", "Gaming"],
 ];
 
-function nav(active, opts = {}) {
+function breakingBar() {
+  return `<div class="breaking-bar"><span class="breaking-label">SENASTE</span><span class="breaking-text">MiniLux Pro 2 testad: native 1080P och 390 ANSI lumen</span><span class="breaking-date">${TODAY}</span></div>`;
+}
+
+function masthead() {
+  return `<div class="masthead"><a class="masthead-name" href="index.html">PROJEKTORGUIDEN<span class="se">.SE</span></a><div class="masthead-rule"><span class="masthead-tagline">Oberoende teknikjournalistik sedan 2023</span></div></div>`;
+}
+
+function compactBrand() {
+  return `<div class="compact-brand"><a href="index.html">PROJEKTORGUIDEN<span class="se">.SE</span></a></div>`;
+}
+
+function catRibbon(active) {
   const links = cats
     .map(
       ([href, label]) =>
-        `<a href="${href}"${href === active ? ' class="active"' : ""}>${label}</a>`
+        `<a href="${href}"${href === active ? ' class="active"' : ""}><span>${label}</span></a>`
     )
     .join("");
-  const topRight = opts.home
-    ? `<div class="nav-search"><input type="text" placeholder="Sök artiklar..."/></div>`
-    : `<a class="nav-back" href="index.html">Tillbaka till bloggen</a>`;
-  return `<div class="topbar"><p>Oberoende teknikjournalistik sedan 2023</p><span${opts.topbarClass ? ` class="topbar-right"` : ""}>${opts.topbarText || "ProjektorTips.se"}</span></div>
-<nav><div class="nav-top"><a class="brand" href="index.html">Projektor<span>Tips</span>.se</a>${topRight}</div><div class="cat-nav">${links}</div></nav>`;
+  return `<div class="cat-ribbon">${links}</div>`;
+}
+
+function siteHeader(active, opts = {}) {
+  const top = breakingBar();
+  const brand = opts.home ? masthead() : compactBrand();
+  return `${top}${brand}${catRibbon(active)}`;
 }
 
 function footer() {
   return `<footer><div class="footer-inner"><div class="footer-grid">
-<div><div class="footer-brand">Projektor<span>Tips</span>.se</div>
-<p class="footer-about">Oberoende blogg om projektorer och hemmabio sedan 2023. Vi testar och granskar utan koppling till någon butik eller tillverkare.</p></div>
-<div class="footer-col"><h4>Populära artiklar</h4><ul>
-<li><a href="minilux-pro-recension.html">MiniLux Pro recension</a></li>
-<li><a href="minilux-pro-2-recension.html">MiniLux Pro 2 recension</a></li>
-<li><a href="minilux-pro-2-vs-pro.html">MiniLux Pro 2 vs Pro</a></li>
-<li><a href="basta-projektorer-2026.html">Bästa projektorer 2026</a></li>
-<li><a href="varfor-kopa-projektor.html">Varför välja projektor</a></li>
-<li><a href="ansi-lumen-guide.html">ANSI Lumen förklarat</a></li>
-</ul></div>
-<div class="footer-col"><h4>Kategorier</h4><ul>
-<li><a href="kategori-guider.html">Guider</a></li>
-<li><a href="kategori-recensioner.html">Recensioner</a></li>
-<li><a href="kategori-tips.html">Tips och tricks</a></li>
-<li><a href="kategori-teknik.html">Teknik</a></li>
-<li><a href="kategori-jamforelser.html">Jämförelser</a></li>
-<li><a href="kategori-hemmabio.html">Hemmabio</a></li>
-</ul></div></div>
+<div><div class="footer-brand">PROJEKTORGUIDEN<span class="se">.SE</span></div>
+<p class="footer-about">Oberoende teknikblogg om projektorer sedan 2023. Vi testar och granskar utan koppling till butiker.</p></div>
+<div class="footer-col"><h4>Populära artiklar</h4>
+<a href="minilux-pro-recension.html">MiniLux Pro recension</a>
+<a href="minilux-pro-2-recension.html">MiniLux Pro 2 recension</a>
+<a href="basta-projektorer-2026.html">Bästa projektorer 2026</a>
+<a href="varfor-kopa-projektor.html">Varför välja projektor</a>
+<a href="ansi-lumen-guide.html">ANSI Lumen förklarat</a>
+<a href="minilux-pro-2-vs-pro.html">MiniLux Pro vs Pro 2</a>
+</div>
+<div class="footer-col"><h4>Kategorier</h4>
+<a href="kategori-guider.html">Guider</a>
+<a href="kategori-recensioner.html">Recensioner</a>
+<a href="kategori-tips.html">Tips</a>
+<a href="kategori-teknik.html">Teknik</a>
+<a href="kategori-jamforelser.html">Jämförelser</a>
+<a href="kategori-hemmabio.html">Hemmabio</a>
+</div></div>
 <div class="footer-bottom">
-<p>&copy; 2026 ProjektorTips.se</p>
-<p><a href="om-oss.html">Om oss</a> &nbsp;·&nbsp; <a href="kontakt.html">Kontakt</a> &nbsp;·&nbsp; <a href="integritetspolicy.html">Integritetspolicy</a></p>
+<p>&copy; 2026 projektorguiden.se — Oberoende granskning</p>
+<p><a href="om-oss.html">Om oss</a> · <a href="kontakt.html">Kontakt</a> · <a href="integritetspolicy.html">Integritetspolicy</a></p>
 </div></div></footer>`;
 }
 
-function sidebarArticle() {
-  return `<aside>
-<div class="sb-section"><div class="sb-title">Mest lästa</div><ul class="sb-posts">
-<li><a href="basta-projektorer-2026.html"><span class="sb-rank">01</span><div><div class="sb-link-title">Bästa projektorerna 2026</div><div class="sb-link-meta">Guide</div></div></a></li>
-<li><a href="minilux-pro-recension.html"><span class="sb-rank">02</span><div><div class="sb-link-title">MiniLux Pro recension</div><div class="sb-link-meta">Recension</div></div></a></li>
-<li><a href="minilux-pro-2-recension.html"><span class="sb-rank">03</span><div><div class="sb-link-title">MiniLux Pro 2 recension</div><div class="sb-link-meta">Recension</div></div></a></li>
-<li><a href="varfor-kopa-projektor.html"><span class="sb-rank">04</span><div><div class="sb-link-title">Varför välja projektor</div><div class="sb-link-meta">Guide</div></div></a></li>
-<li><a href="ansi-lumen-guide.html"><span class="sb-rank">05</span><div><div class="sb-link-title">ANSI Lumen förklarat</div><div class="sb-link-meta">Teknik</div></div></a></li>
-</ul></div>
-<div class="sb-section"><div class="sb-title">Ämnen</div><div class="tag-cloud">
+function newsletterBox() {
+  return `<div class="newsletter-box"><div class="newsletter-title">NYHETSBREV</div><p class="newsletter-sub">Veckans bästa artiklar direkt i inkorgen</p><a class="newsletter-btn" href="kontakt.html">PRENUMERERA</a></div>`;
+}
+
+function sidebarMostRead() {
+  return `<div class="sb-section"><div class="sb-title">Mest läst</div><ul class="sb-posts">
+<li><a href="minilux-pro-recension.html"><span class="sb-rank">01</span><div><div class="sb-link-title">MiniLux Pro recension</div></div></a></li>
+<li><a href="minilux-pro-2-recension.html"><span class="sb-rank">02</span><div><div class="sb-link-title">MiniLux Pro 2 recension</div></div></a></li>
+<li><a href="basta-projektorer-2026.html"><span class="sb-rank">03</span><div><div class="sb-link-title">Bästa projektorerna 2026</div></div></a></li>
+<li><a href="varfor-kopa-projektor.html"><span class="sb-rank">04</span><div><div class="sb-link-title">Varför välja projektor</div></div></a></li>
+<li><a href="ansi-lumen-guide.html"><span class="sb-rank">05</span><div><div class="sb-link-title">ANSI Lumen förklarat</div></div></a></li>
+</ul></div>`;
+}
+
+function sidebarTags() {
+  return `<div class="sb-section"><div class="sb-title">Ämnen</div><div class="tag-cloud">
 <a class="tag" href="kategori-recensioner.html">Projektorer</a>
-<a class="tag" href="kategori-hemmabio.html">Hemmabio</a>
-<a class="tag" href="kategori-recensioner.html">Recensioner</a>
 <a class="tag" href="kategori-guider.html">Guider</a>
+<a class="tag" href="kategori-recensioner.html">Recensioner</a>
+<a class="tag" href="kategori-hemmabio.html">Hemmabio</a>
+<a class="tag" href="kategori-gaming.html">Gaming</a>
 <a class="tag" href="kategori-tips.html">Tips</a>
 <a class="tag" href="kategori-teknik.html">Teknik</a>
 <a class="tag" href="kategori-jamforelser.html">Jämförelser</a>
 <a class="tag" href="4k-vs-1080p.html">4K</a>
 <a class="tag" href="ljud-projektor.html">Ljud</a>
 <a class="tag" href="hemmabio-budget.html">Budget</a>
-<a class="tag" href="kategori-gaming.html">Gaming</a>
-</div></div></aside>`;
+<a class="tag" href="projektor-sovrum.html">Sovrum</a>
+</div></div>`;
+}
+
+function sidebarArticle() {
+  return `<aside>${sidebarMostRead()}${newsletterBox()}${sidebarTags()}</aside>`;
+}
+
+function trustBarGrid(items) {
+  const icons = ["✓", "◉", "★", "●"];
+  return `<div class="trust-bar">${items
+    .map(
+      (t, i) =>
+        `<div class="trust-cell"><span class="trust-icon">${icons[i] || "•"}</span><strong>${t}</strong><span>&nbsp;</span></div>`
+    )
+    .join("")}</div>`;
 }
 
 function articlePage({
@@ -253,6 +334,7 @@ function articlePage({
   related,
   bio,
 }) {
+  const catClass = ["Teknik", "Jämförelse", "Gaming"].includes(catLabel) ? "art-cat cat-dark" : "art-cat";
   return `<!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -264,14 +346,17 @@ ${FONTS}
 <style>${BASE_CSS}${ARTICLE_CSS}</style>
 </head>
 <body>
-${nav(activeCat)}
-<div class="container"><div class="article-grid">
+${siteHeader(activeCat)}
+<div class="container-narrow"><div class="article-grid">
 <article>
-<div class="art-cat">${catLabel}</div>
+<div class="art-header">
+<span class="${catClass}">${catLabel}</span>
 <h1>${h1}</h1>
 <p class="art-intro">${intro}</p>
-<div class="art-meta"><strong>${author.name}</strong><span class="dot"></span><span>${date}</span><span class="dot"></span><span>${readMin} min läsning</span></div>
-${trust ? `<div class="trust-bar">${trust.map((t) => `<span>${t}</span>`).join("")}</div>` : ""}
+<div class="art-meta"><strong>${author.name}</strong><span class="meta-sep">·</span><span>${date}</span><span class="meta-sep">·</span><span>${readMin} min läsning</span></div>
+<hr class="meta-rule"/>
+</div>
+${trust ? trustBarGrid(trust) : ""}
 <div class="art-img">[ Artikelbild ]</div>
 <div class="body">${body}</div>
 ${bio}
@@ -287,7 +372,7 @@ function bioPer() {
   return `<div class="author-bio"><div class="av-lg">PB</div><div>
 <div class="bio-expert-tag">Teknikexpert</div>
 <div class="bio-name">Per Bergman</div>
-<div class="bio-title">Seniorskribent, ProjektorTips.se</div>
+<div class="bio-title">Seniorskribent, projektorguiden.se</div>
 <p class="bio-text">Per Bergman är seniorskribent med 9 års erfarenhet av konsumentelektronik. Han har tidigare arbetat som AV-tekniker och teknikskribent för svenska konsumenttidningar, och specialiserar sig på bildteknik och projektionsteknik. Alla produkter köps med egna medel.</p>
 <div class="bio-stats">
 <div class="bio-stat"><strong>9 år</strong><span>Erfarenhet</span></div>
@@ -300,7 +385,7 @@ function bioErik() {
   return `<div class="author-bio"><div class="av-lg">EL</div><div>
 <div class="bio-expert-tag">Teknikskribent</div>
 <div class="bio-name">Erik Lindström</div>
-<div class="bio-title">Teknikskribent, ProjektorTips.se</div>
+<div class="bio-title">Teknikskribent, projektorguiden.se</div>
 <p class="bio-text">Erik Lindström har 11 års erfarenhet som teknikskribent. Han var tidigare redaktör på Råd och Rön Teknik och bidragsskribent för Elektroniktidningen. Han köper alltid produkter med egna medel och tar inga sponsrade uppdrag.</p>
 <div class="bio-stats">
 <div class="bio-stat"><strong>11 år</strong><span>Erfarenhet</span></div>
@@ -313,7 +398,7 @@ function bioAnna() {
   return `<div class="author-bio"><div class="av-lg">AS</div><div>
 <div class="bio-expert-tag">Köpguider</div>
 <div class="bio-name">Anna Svensson</div>
-<div class="bio-title">Teknikskribent, ProjektorTips.se</div>
+<div class="bio-title">Teknikskribent, projektorguiden.se</div>
 <p class="bio-text">Anna Svensson är teknikskribent med 7 års erfarenhet och utbildning inom medie- och kommunikationsvetenskap. Hon specialiserar sig på köpguider och konsumentvägledning för familjer och förstagångsköpare.</p>
 <div class="bio-stats">
 <div class="bio-stat"><strong>7 år</strong><span>Erfarenhet</span></div>
@@ -323,22 +408,23 @@ function bioAnna() {
 }
 
 function relatedCards(items) {
-  return `<div class="related"><div class="related-title">Fler artiklar du kanske gillar</div><div class="related-grid">${items
+  return `<div class="related"><div class="related-title">Fler artiklar</div><div class="related-grid">${items
     .map(
       ([href, cat, title]) =>
-        `<a class="rel-card" href="${href}"><div class="rel-img">[ Bild ]</div><div class="rel-body"><span class="rel-cat">${cat}</span><div class="rel-title">${title}</div></div></a>`
+        `<a class="rel-card" href="${href}"><div class="rel-img">[ Bild ]</div><span class="rel-cat">${cat}</span><div class="rel-title">${title}</div></a>`
     )
     .join("")}</div></div>`;
 }
 
 function scoreRows(rows, total) {
+  const stars = "★".repeat(Math.round(total));
   const bars = rows
     .map(
       ([lbl, val]) =>
         `<div class="score-row"><span class="score-lbl">${lbl}</span><div class="score-bar"><div class="score-fill" style="width:${val * 20}%"></div></div><span class="score-val">${val}</span></div>`
     )
     .join("");
-  return `<div class="score-box">${bars}<div class="score-total"><span class="score-num">${total}</span><span style="color:#aaa">/5</span></div></div>`;
+  return `<div class="score-box"><div class="score-title">Betyg</div>${bars}<div class="score-total"><span class="score-num">${total}</span><span class="score-stars">${stars}</span><span class="score-label">/5 totalt</span></div></div>`;
 }
 
 function prosCons(pros, cons) {
@@ -346,18 +432,18 @@ function prosCons(pros, cons) {
 }
 
 function ctaPro1() {
-  return `<div class="cta-box"><h3>Köp MiniLux Pro för 1 499 kr hos miniprojektor.se</h3><a class="cta-btn" href="${PRO1_URL}" rel="noopener">Se pris och lagerstatus</a></div>`;
+  return `<div class="cta-box"><div class="cta-left"><span class="cta-label">Köp nu</span><div class="cta-name">MiniLux Pro — 1 499 kr</div><div class="cta-tag">hos miniprojektor.se</div></div><a class="cta-btn" href="${PRO1_URL}" rel="noopener">Se pris och lagerstatus</a></div>`;
 }
 
 function ctaPro2() {
-  return `<div class="cta-box"><h3>Köp MiniLux Pro 2 för 1 999 kr</h3><a class="cta-btn" href="${PRO2_URL}" rel="noopener">Se pris och lagerstatus</a></div>`;
+  return `<div class="cta-box"><div class="cta-left"><span class="cta-label">Köp nu</span><div class="cta-name">MiniLux Pro 2 — 1 999 kr</div><div class="cta-tag">hos miniprojektor.se</div></div><a class="cta-btn" href="${PRO2_URL}" rel="noopener">Se pris och lagerstatus</a></div>`;
 }
 
-function categoryPage(activeCat, h1, cards) {
-  const grid = cards
+function categoryPage(activeCat, h1, subtitle, catLabel, cards) {
+  const list = cards
     .map(
       ([href, title, excerpt, author]) =>
-        `<a class="cat-card" href="${href}"><div class="cat-thumb">[ Bild ]</div><div><div class="cat-card-title">${title}</div><p class="cat-card-excerpt">${excerpt}</p><div class="cat-card-meta">${author}</div></div></a>`
+        `<a class="cat-item" href="${href}"><div class="cat-thumb">[ Bild ]</div><div><span class="cat-item-cat">${catLabel}</span><div class="cat-item-title">${title}</div><div class="cat-item-meta">Av ${author}</div><p class="cat-item-excerpt">${excerpt}</p></div></a>`
     )
     .join("");
   return `<!DOCTYPE html>
@@ -365,102 +451,85 @@ function categoryPage(activeCat, h1, cards) {
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>${h1} | ProjektorTips.se</title>
-<meta name="description" content="${h1} på ProjektorTips.se. Oberoende guider och recensioner om projektorer."/>
+<title>${h1} | projektorguiden.se</title>
+<meta name="description" content="${h1} på projektorguiden.se. Oberoende guider och recensioner om projektorer."/>
 ${FONTS}
 <style>${BASE_CSS}${ARTICLE_CSS}</style>
 </head>
 <body>
-${nav(activeCat)}
-<div class="container page-main wide">
-<h1>${h1}</h1>
-<p style="color:#666;margin:1rem 0 2rem">Alla artiklar i kategorin.</p>
-<div class="cat-grid">${grid}</div>
-</div>
+${siteHeader(activeCat)}
+<div class="cat-hero"><h1>${h1}</h1><p>${subtitle}</p></div>
+<div class="cat-list">${list}</div>
 ${footer()}
 </body></html>`;
 }
 
 function indexPage() {
-  const posts = [
-    ["minilux-pro-recension.html", "pt-rec", "Recension", "MiniLux Pro testad: vi använde den i 30 dagar i verkliga miljöer", "200 ANSI Lumen, XGA 1280×720, 180 graders rotation och 4000+ appar. Vårt mest grundliga budgettest.", "Per Bergman", "18 maj 2026", "12"],
-    ["minilux-pro-2-recension.html", "pt-rec", "Recension", "MiniLux Pro 2 recension: 390 ANSI och native 1080P för 1 999 kr", "WiFi 6, native 1080P och nästan dubbelt så stark som Pro. Vi testade uppgraderingen i fyra rum.", "Erik Lindström", "22 maj 2026", "14"],
-    ["varfor-kopa-projektor.html", "pt-guide", "Guide", "Varför du ska köpa en projektor istället för en stor-TV", "Sju konkreta skäl till varför en projektor ger mer upplevelse per krona än vad någon stor-TV klarar av.", "Anna Svensson", "10 maj 2026", "9"],
-    ["hemmabio-budget.html", "pt-guide", "Guide", "Hemmabio under 5000 kr: så bygger du det smartaste upplaget", "Tre kompletta hemmabioupplag för tre budgetar. En miniprojektor och en bra högtalare slår en stor-TV i den här klassen.", "Anna Svensson", "26 apr 2026", "8"],
-    ["ansi-lumen-guide.html", "pt-tech", "Teknik", "Vad är ANSI Lumen och hur mycket ljusstyrka behöver du egentligen?", "Siffrorna på förpackningen säger sällan hela sanningen. Vad du faktiskt behöver veta för att göra rätt val.", "Erik Lindström", "20 apr 2026", "6"],
-    ["projektor-sovrum.html", "pt-guide", "Guide", "Projektor i sovrummet: allt du behöver veta för att lyckas", "180 graders rotation, keystone och Bluetooth-hörlurar. Så får du en perfekt sovrumsupplevelse utan att störa någon.", "Anna Svensson", "15 apr 2026", "7"],
-    ["utomhusbio-guide.html", "pt-tips", "Tips", "Utomhusbio hemma: så sätter du upp en perfekt biokväll på terrassen", "Film på 120 tum mot husväggen. Enklare än du tror och imponerar alltid på gäster. Vår praktiska startguide.", "Per Bergman", "10 apr 2026", "5"],
-    ["minilux-pro-2-vs-pro.html", "pt-jmf", "Jämförelse", "MiniLux Pro 2 vs Pro: är uppgraderingen värd 500 kr?", "Vi har testat båda i fyra veckor. Frågan om man ska uppgradera beror helt på hur du tänker använda projektorn.", "Anna Svensson", "5 apr 2026", "9"],
-    ["projektor-gaming.html", "pt-tech", "Gaming", "Projektor för gaming: input lag, Hz och vad du måste ha koll på", "Inte alla projektorer passar för spel. De viktigaste specifikationerna för en låg-fördröjnings spelupplevelse på storbild.", "Per Bergman", "1 apr 2026", "7"],
-    ["keystone-guide.html", "pt-tech", "Teknik", "Keystone-korrigering förklarat: så får du en rektangulär bild varje gång", "Den lilla inställningen som gör stor skillnad. Vi förklarar vad keystone är och hur auto-korrigering funkar i praktiken.", "Per Bergman", "25 mar 2026", "4"],
-    ["projektor-vs-tv.html", "pt-jmf", "Jämförelse", "Projektor eller TV: en ärlig jämförelse utan reklamlöften", "Vi går igenom pris per tum, bildkvalitet i olika ljusmiljöer och flexibilitet. Svaret är mer nyanserat än du tror.", "Anna Svensson", "20 mar 2026", "8"],
-    ["projiceringsduk-guide.html", "pt-guide", "Guide", "Välja projiceringsduk: storlek, material och vad du faktiskt behöver", "En vit vägg funkar. Men rätt duk gör det bättre. Vi går igenom vad som spelar roll och vad du kan skippa.", "Anna Svensson", "15 mar 2026", "6"],
-    ["ljud-projektor.html", "pt-tips", "Tips", "Så får du bra ljud till din projektor: tre alternativ för olika behov", "Inbyggda högtalare räcker sällan. Bluetooth-högtalare, soundbar eller stereo? Vi hjälper dig välja rätt.", "Erik Lindström", "10 mar 2026", "5"],
-    ["optimera-rummet.html", "pt-tips", "Tips", "8 enkla sätt att optimera rummet för bättre projektor-bild", "Gardiner, väggfärg och möbelplacering påverkar bildkvaliteten mer än tekniken. Så använder du rummet till din fördel.", "Per Bergman", "5 mar 2026", "5"],
-    ["4k-vs-1080p.html", "pt-tech", "Teknik", "4K, 1080p eller 720p: vilken upplösning räcker för din setup?", "Höjer 4K verkligen upplevelsen när du sitter fyra meter från duken? Vi testar vad ögat faktiskt kan se.", "Erik Lindström", "28 feb 2026", "6"],
-    ["wifi-streaming.html", "pt-tech", "Teknik", "WiFi-streaming till projektor: WiFi 6 och stabilt hemmabio", "När standard WiFi inte räcker och varför dual band spelar roll för 1080P utan buffring.", "Erik Lindström", "22 feb 2026", "6"],
+  const secondary = [
+    ["minilux-pro-recension.html", "Recension", "MiniLux Pro testad: vi använde den i 30 dagar i verkliga miljöer", "Per Bergman", "15 maj 2026"],
+    ["minilux-pro-2-recension.html", "Recension", "MiniLux Pro 2 recension: native 1080P och 390 ANSI testad", "Erik Lindström", "8 maj 2026"],
+    ["varfor-kopa-projektor.html", "Guide", "Varför du ska köpa en projektor istället för en stor-TV", "Anna Svensson", "10 maj 2026"],
+    ["hemmabio-budget.html", "Guide", "Hemmabio under 5000 kr: så bygger du det smartaste upplaget", "Anna Svensson", "26 apr 2026"],
+    ["ansi-lumen-guide.html", "Teknik", "Vad är ANSI Lumen och hur mycket ljusstyrka behöver du egentligen?", "Erik Lindström", "20 apr 2026"],
+    ["projektor-sovrum.html", "Guide", "Projektor i sovrummet: allt du behöver veta för att lyckas", "Anna Svensson", "15 apr 2026"],
   ];
-  const postHtml = posts
+  const more = [
+    ["utomhusbio-guide.html", "Tips", "cat-tips", "Utomhusbio hemma: så sätter du upp en perfekt biokväll på terrassen", "Per Bergman"],
+    ["minilux-pro-2-vs-pro.html", "Jämförelse", "cat-jmf", "MiniLux Pro 2 vs Pro: är uppgraderingen värd 500 kr?", "Anna Svensson"],
+    ["projektor-gaming.html", "Gaming", "cat-game", "Projektor för gaming: input lag, Hz och vad du måste ha koll på", "Per Bergman"],
+    ["keystone-guide.html", "Teknik", "cat-tech", "Keystone-korrigering förklarat: så får du en rektangulär bild varje gång", "Per Bergman"],
+    ["projektor-vs-tv.html", "Jämförelse", "cat-jmf", "Projektor eller TV: en ärlig jämförelse utan reklamlöften", "Anna Svensson"],
+    ["projiceringsduk-guide.html", "Guide", "cat-guide", "Välja projiceringsduk: storlek, material och vad du faktiskt behöver", "Anna Svensson"],
+    ["ljud-projektor.html", "Tips", "cat-tips", "Så får du bra ljud till din projektor: tre alternativ för olika behov", "Erik Lindström"],
+    ["optimera-rummet.html", "Tips", "cat-tips", "8 enkla sätt att optimera rummet för bättre projektor-bild", "Per Bergman"],
+    ["4k-vs-1080p.html", "Teknik", "cat-tech", "4K, 1080p eller 720p: vilken upplösning räcker för din setup?", "Erik Lindström"],
+    ["wifi-streaming.html", "Teknik", "cat-tech", "WiFi-streaming till projektor: WiFi 6 och stabilt hemmabio", "Erik Lindström"],
+  ];
+  const secHtml = secondary
     .map(
-      ([href, thumb, cat, title, excerpt, author, date, min]) =>
-        `<a class="post-item" href="${href}"><div class="post-thumb ${thumb}">[ Bild ]</div><div><div class="post-item-cat">${cat}</div><div class="post-item-title">${title}</div><div class="post-item-excerpt">${excerpt}</div><div class="post-item-meta">${author} &nbsp;·&nbsp; ${date} &nbsp;·&nbsp; ${min} min</div></div></a>`
+      ([href, cat, title, author, date]) =>
+        `<a class="sec-story" href="${href}"><span class="sec-cat">${cat}</span><div class="sec-headline">${title}</div><div class="sec-byline">Av ${author}, ${date}</div></a>`
     )
     .join("");
-  const sidebarMost = `<div class="sb-section"><div class="sb-title">Mest lästa</div><ul class="sb-posts">
-<li><a href="basta-projektorer-2026.html"><span class="sb-rank">01</span><div><div class="sb-link-title">Bästa projektorerna 2026: vår kompletta guide</div><div class="sb-link-meta">Guide · 20 maj 2026</div></div></a></li>
-<li><a href="minilux-pro-recension.html"><span class="sb-rank">02</span><div><div class="sb-link-title">MiniLux Pro testad: 30 dagars användning</div><div class="sb-link-meta">Recension · 18 maj 2026</div></div></a></li>
-<li><a href="minilux-pro-2-recension.html"><span class="sb-rank">03</span><div><div class="sb-link-title">MiniLux Pro 2 recension</div><div class="sb-link-meta">Recension · 22 maj 2026</div></div></a></li>
-<li><a href="varfor-kopa-projektor.html"><span class="sb-rank">04</span><div><div class="sb-link-title">Varför projektor slår stor-TV</div><div class="sb-link-meta">Guide · 10 maj 2026</div></div></a></li>
-<li><a href="ansi-lumen-guide.html"><span class="sb-rank">05</span><div><div class="sb-link-title">ANSI Lumen förklarat</div><div class="sb-link-meta">Teknik · 20 apr 2026</div></div></a></li>
-</ul></div>`;
-  const tags = `<div class="sb-section"><div class="sb-title">Ämnen</div><div class="tag-cloud">
-<a class="tag" href="kategori-guider.html">Guider</a>
-<a class="tag" href="kategori-recensioner.html">Recensioner</a>
-<a class="tag" href="kategori-hemmabio.html">Hemmabio</a>
-<a class="tag" href="kategori-gaming.html">Gaming</a>
-<a class="tag" href="kategori-tips.html">Tips</a>
-<a class="tag" href="kategori-teknik.html">Teknik</a>
-<a class="tag" href="kategori-jamforelser.html">Jämförelser</a>
-<a class="tag" href="utomhusbio-guide.html">Utomhusbio</a>
-<a class="tag" href="hemmabio-budget.html">Budget</a>
-<a class="tag" href="4k-vs-1080p.html">4K</a>
-<a class="tag" href="projektor-sovrum.html">Sovrum</a>
-<a class="tag" href="ljud-projektor.html">Ljud</a>
-</div></div>`;
+  const moreHtml = more
+    .map(
+      ([href, cat, cls, title, author]) =>
+        `<a class="more-item" href="${href}"><span class="more-cat ${cls}">${cat}</span><div class="more-headline">${title}</div><div class="more-author">${author}</div></a>`
+    )
+    .join("");
   return `<!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>ProjektorTips.se | Guider och tester om projektorer</title>
+<title>projektorguiden.se | Guider och tester om projektorer</title>
 <meta name="description" content="Oberoende blogg om projektorer. Guider, recensioner och köpråd för dig som vill ha storbild hemma."/>
 ${FONTS}
 <style>${BASE_CSS}${ARTICLE_CSS}${INDEX_CSS}</style>
 </head>
 <body>
-${nav("index.html", { home: true, topbarText: "Senaste: MiniLux Pro 2 recension", topbarClass: true })}
-<div class="container"><div class="main-grid">
-<main>
-<div class="featured">
-<div class="featured-img">[ Omslagsbild ]</div>
-<div class="feat-meta"><span class="cat-label">Guide</span><span class="dot"></span><span class="meta-date">20 maj 2026</span></div>
-<h2>Bästa projektorerna 2026: vår kompletta guide för alla budgetar</h2>
-<p>Vi har testat dussintals modeller och sammanställt den definitiva listan över de bästa projektorerna just nu. Oavsett om du har 1500 kr eller 15 000 kr att lägga ner finns rätt alternativ för dig.</p>
-<div class="feat-author"><div class="av">EL</div><div class="feat-author-txt"><strong>Erik Lindström</strong> · Teknikskribent, 11 års erfarenhet</div></div>
-<br/><a class="read-more" href="basta-projektorer-2026.html">Läs hela artikeln</a>
+${siteHeader("index.html", { home: true })}
+<div class="container">
+<div class="paper-grid">
+<div class="col-main">
+<div class="hero-img">[ Omslagsbild ]</div>
+<span class="cat-label">Guide</span>
+<h2 class="main-headline">Bästa projektorerna 2026: vår kompletta guide för alla budgetar</h2>
+<div class="main-byline">Av Erik Lindström, 20 maj 2026</div>
+<p class="main-excerpt">Vi har testat dussintals modeller och sammanställt den definitiva listan över de bästa projektorerna just nu. Oavsett om du har 1500 kr eller 15 000 kr att lägga ner finns rätt alternativ för dig.</p>
+<a class="read-more" href="basta-projektorer-2026.html">Läs hela artikeln →</a>
 </div>
-<div class="post-list">${postHtml}</div>
-</main>
-<aside>
-<div class="sb-section"><div class="about-box"><p>Oberoende blogg om projektorer och hemmabio. Vi testar, granskar och guidar utan reklamlöften eller betalda rekommendationer.</p></div></div>
-${sidebarMost}
-${tags}
-<div class="sb-section"><div class="sb-title">Senaste recensionerna</div><ul class="sb-posts">
-<li><a href="minilux-pro-2-recension.html"><span class="sb-rank">→</span><div><div class="sb-link-title">MiniLux Pro 2: 390 ANSI testad</div><div class="sb-link-meta">22 maj 2026</div></div></a></li>
-<li><a href="minilux-pro-recension.html"><span class="sb-rank">→</span><div><div class="sb-link-title">MiniLux Pro: 30 dagars test</div><div class="sb-link-meta">18 maj 2026</div></div></a></li>
-</ul></div>
-</aside>
-</div></div>
+<div class="col-divider"></div>
+<div class="col-secondary">${secHtml}</div>
+<div class="col-divider"></div>
+<div class="col-sidebar">${sidebarMostRead()}${newsletterBox()}</div>
+</div>
+<hr class="section-rule"/>
+<div class="more-section">
+<div class="more-label">Fler artiklar</div>
+<div class="more-grid">${moreHtml}</div>
+</div>
+</div>
 ${footer()}
 </body></html>`;
 }
@@ -470,7 +539,7 @@ const pages = {};
 // minilux-pro-recension
 pages["minilux-pro-recension.html"] = articlePage({
   title: "",
-  metaTitle: "MiniLux Pro recension: är den värd 1 499 kr? | ProjektorTips.se",
+  metaTitle: "MiniLux Pro recension: är den värd 1 499 kr? | projektorguiden.se",
   metaDesc:
     "Vi testade MiniLux Pro i 30 dagar. 200 ANSI Lumen, XGA upplösning, 180 graders rotation och 4000+ appar. Läs vår ärliga recension.",
   activeCat: "kategori-recensioner.html",
@@ -550,7 +619,7 @@ ${ctaPro1()}`,
 });
 
 pages["minilux-pro-2-recension.html"] = articlePage({
-  metaTitle: "MiniLux Pro 2 recension: 390 ANSI och 1080P för 1 999 kr | ProjektorTips.se",
+  metaTitle: "MiniLux Pro 2 recension: 390 ANSI och 1080P för 1 999 kr | projektorguiden.se",
   metaDesc: "Vi testade MiniLux Pro 2 i 30 dagar. Native 1080P, 390 ANSI Lumen, WiFi 6 och 5W HiFi. Läs vår recension.",
   activeCat: "kategori-recensioner.html",
   catLabel: "Recension",
@@ -595,7 +664,7 @@ ${ctaPro2()}`,
 });
 
 pages["minilux-pro-2-vs-pro.html"] = articlePage({
-  metaTitle: "MiniLux Pro 2 vs Pro: vilken ska du köpa? | ProjektorTips.se",
+  metaTitle: "MiniLux Pro 2 vs Pro: vilken ska du köpa? | projektorguiden.se",
   metaDesc: "Jämförelse mellan MiniLux Pro och MiniLux Pro 2. ANSI Lumen, upplösning, WiFi och pris i praktiken.",
   activeCat: "kategori-jamforelser.html",
   catLabel: "Jämförelse",
@@ -632,7 +701,7 @@ pages["minilux-pro-2-vs-pro.html"] = articlePage({
 });
 
 pages["basta-projektorer-2026.html"] = articlePage({
-  metaTitle: "Bästa projektorerna 2026: topp 6 för alla budgetar | ProjektorTips.se",
+  metaTitle: "Bästa projektorerna 2026: topp 6 för alla budgetar | projektorguiden.se",
   metaDesc: "Vår rankade lista över de bästa projektorerna 2026. Från premium till budget under 2000 kr.",
   activeCat: "kategori-guider.html",
   catLabel: "Guide",
@@ -660,7 +729,7 @@ pages["basta-projektorer-2026.html"] = articlePage({
 });
 
 pages["varfor-kopa-projektor.html"] = articlePage({
-  metaTitle: "Varför köpa projektor istället för TV? 7 skäl | ProjektorTips.se",
+  metaTitle: "Varför köpa projektor istället för TV? 7 skäl | projektorguiden.se",
   metaDesc: "Sju konkreta skäl att välja projektor framför stor-TV. Storlek, pris per tum och flexibilitet.",
   activeCat: "kategori-guider.html",
   catLabel: "Guide",
@@ -696,7 +765,7 @@ pages["varfor-kopa-projektor.html"] = articlePage({
 });
 
 pages["ansi-lumen-guide.html"] = articlePage({
-  metaTitle: "ANSI Lumen förklarat: hur mycket ljus behöver du? | ProjektorTips.se",
+  metaTitle: "ANSI Lumen förklarat: hur mycket ljus behöver du? | projektorguiden.se",
   metaDesc: "Vad är ANSI Lumen? Vi förklarar mätvärdet och hur mycket ljusstyrka du behöver i olika rum.",
   activeCat: "kategori-teknik.html",
   catLabel: "Teknik",
@@ -729,7 +798,7 @@ pages["ansi-lumen-guide.html"] = articlePage({
   ]),
 });
 
-pages["kategori-guider.html"] = categoryPage("kategori-guider.html", "Guider", [
+pages["kategori-guider.html"] = categoryPage("kategori-guider.html", "Guider", "Köpguider och praktiska råd för hemmabio.", "Guide", [
   ["basta-projektorer-2026.html", "Bästa projektorerna 2026", "Rankad lista för alla budgetar.", "Erik Lindström"],
   ["varfor-kopa-projektor.html", "Varför köpa projektor", "Sju skäl att välja projektor framför TV.", "Anna Svensson"],
   ["hemmabio-budget.html", "Hemmabio under 5000 kr", "Bygg hemmabio utan att spräcka budgeten.", "Anna Svensson"],
@@ -737,31 +806,31 @@ pages["kategori-guider.html"] = categoryPage("kategori-guider.html", "Guider", [
   ["utomhusbio-guide.html", "Utomhusbio hemma", "Terrass och trädgård steg för steg.", "Per Bergman"],
   ["projiceringsduk-guide.html", "Välja projiceringsduk", "Storlek, material och tips.", "Anna Svensson"],
 ]);
-pages["kategori-recensioner.html"] = categoryPage("kategori-recensioner.html", "Recensioner", [
+pages["kategori-recensioner.html"] = categoryPage("kategori-recensioner.html", "Recensioner", "Oberoende produkttester med egna medel.", "Recension", [
   ["minilux-pro-recension.html", "MiniLux Pro recension", "30 dagars test av budgetmodellen.", "Per Bergman"],
   ["minilux-pro-2-recension.html", "MiniLux Pro 2 recension", "390 ANSI och native 1080P testad.", "Erik Lindström"],
 ]);
-pages["kategori-tips.html"] = categoryPage("kategori-tips.html", "Tips och tricks", [
+pages["kategori-tips.html"] = categoryPage("kategori-tips.html", "Tips och tricks", "Praktiska tips för bättre hemmabio.", "Tips", [
   ["optimera-rummet.html", "Optimera rummet", "Åtta enkla förbättringar för bilden.", "Per Bergman"],
   ["ljud-projektor.html", "Bra ljud till projektor", "Bluetooth, soundbar eller stereo.", "Erik Lindström"],
   ["utomhusbio-guide.html", "Utomhusbio hemma", "Praktisk guide för sommarkvällar.", "Per Bergman"],
 ]);
-pages["kategori-teknik.html"] = categoryPage("kategori-teknik.html", "Teknik", [
+pages["kategori-teknik.html"] = categoryPage("kategori-teknik.html", "Teknik", "Förklaringar av specifikationer och teknik.", "Teknik", [
   ["ansi-lumen-guide.html", "ANSI Lumen förklarat", "Hur mycket ljus behöver du?", "Erik Lindström"],
   ["4k-vs-1080p.html", "4K vs 1080p", "Vilken upplösning räcker?", "Erik Lindström"],
   ["keystone-guide.html", "Keystone-korrigering", "Rektangulär bild varje gång.", "Per Bergman"],
   ["wifi-streaming.html", "WiFi-streaming", "WiFi 6 och stabilt streaming.", "Erik Lindström"],
 ]);
-pages["kategori-jamforelser.html"] = categoryPage("kategori-jamforelser.html", "Jämförelser", [
+pages["kategori-jamforelser.html"] = categoryPage("kategori-jamforelser.html", "Jämförelser", "Modell mot modell — utan reklamlöften.", "Jämförelse", [
   ["minilux-pro-2-vs-pro.html", "MiniLux Pro 2 vs Pro", "Vilken modell passar dig?", "Anna Svensson"],
   ["projektor-vs-tv.html", "Projektor eller TV", "Ärlig jämförelse utan hype.", "Anna Svensson"],
 ]);
-pages["kategori-hemmabio.html"] = categoryPage("kategori-hemmabio.html", "Hemmabio", [
+pages["kategori-hemmabio.html"] = categoryPage("kategori-hemmabio.html", "Hemmabio", "Bygg hemmabio smart — även på budget.", "Hemmabio", [
   ["hemmabio-budget.html", "Hemmabio under 5000 kr", "Kompletta upplag för tre budgetar.", "Anna Svensson"],
   ["varfor-kopa-projektor.html", "Varför projektor", "Storbild hemma utan biograf-rum.", "Anna Svensson"],
   ["ljud-projektor.html", "Ljud till hemmabio", "Så höjer du ljudkvaliteten.", "Erik Lindström"],
 ]);
-pages["kategori-gaming.html"] = categoryPage("kategori-gaming.html", "Gaming", [
+pages["kategori-gaming.html"] = categoryPage("kategori-gaming.html", "Gaming", "Projektor för spel på storbild.", "Gaming", [
   ["projektor-gaming.html", "Projektor för gaming", "Input lag och Hz du behöver känna till.", "Per Bergman"],
 ]);
 
@@ -770,15 +839,15 @@ pages["om-oss.html"] = `<!DOCTYPE html>
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Om oss | ProjektorTips.se</title>
-<meta name="description" content="Lär känna redaktionen bakom ProjektorTips.se. Oberoende tester sedan 2023."/>
+<title>Om oss | projektorguiden.se</title>
+<meta name="description" content="Lär känna redaktionen bakom projektorguiden.se. Oberoende tester sedan 2023."/>
 ${FONTS}
 <style>${BASE_CSS}${ARTICLE_CSS}</style>
 </head>
 <body>
-${nav("index.html")}
-<div class="container page-main">
-<h1>Om ProjektorTips.se</h1>
+${siteHeader("index.html")}
+<div class="container-narrow page-main">
+<h1>Om projektorguiden.se</h1>
 <p style="margin:1rem 0 2rem;color:#555">Vi är en oberoende svensk blogg om projektorer och hemmabio. Alla produkter vi recenserar köps med egna medel. Vi tar inte betalt för positiva omdömen.</p>
 <div class="author-card">${bioErik().replace('class="author-bio"', 'class="author-bio" style="border:none;padding:0;margin:0"')}</div>
 <div class="author-card">${bioAnna().replace('class="author-bio"', 'class="author-bio" style="border:none;padding:0;margin:0"')}</div>
@@ -792,16 +861,16 @@ pages["kontakt.html"] = `<!DOCTYPE html>
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Kontakt | ProjektorTips.se</title>
-<meta name="description" content="Kontakta redaktionen på ProjektorTips.se."/>
+<title>Kontakt | projektorguiden.se</title>
+<meta name="description" content="Kontakta redaktionen på projektorguiden.se."/>
 ${FONTS}
 <style>${BASE_CSS}${ARTICLE_CSS}</style>
 </head>
 <body>
-${nav("index.html")}
-<div class="container page-main">
+${siteHeader("index.html")}
+<div class="container-narrow page-main">
 <h1>Kontakt</h1>
-<p style="margin:1rem 0">Maila oss på <a href="mailto:redaktion@projektortips.se">redaktion@projektortips.se</a>. Vi svarar vanligtvis inom två arbetsdagar.</p>
+<p style="margin:1rem 0">Maila oss på <a href="mailto:redaktion@projektorguiden.se">redaktion@projektorguiden.se</a>. Vi svarar vanligtvis inom två arbetsdagar.</p>
 <p style="margin-bottom:2rem;color:#666">Vi tar inte emot betalda recensioner eller sponsrade köplänkar mot ersättning. Tips om produkter att testa är välkomna, men redaktionen bestämmer själv vad som publiceras.</p>
 <form action="#" method="post">
 <div class="form-group"><label for="namn">Namn</label><input id="namn" name="namn" type="text" required/></div>
@@ -818,19 +887,19 @@ pages["integritetspolicy.html"] = `<!DOCTYPE html>
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Integritetspolicy | ProjektorTips.se</title>
-<meta name="description" content="Integritetspolicy för ProjektorTips.se enligt GDPR."/>
+<title>Integritetspolicy | projektorguiden.se</title>
+<meta name="description" content="Integritetspolicy för projektorguiden.se enligt GDPR."/>
 ${FONTS}
 <style>${BASE_CSS}${ARTICLE_CSS}</style>
 </head>
 <body>
-${nav("index.html")}
-<div class="container page-main">
+${siteHeader("index.html")}
+<div class="container-narrow page-main">
 <h1>Integritetspolicy</h1>
 <div class="body" style="margin-top:1.5rem">
-<p>ProjektorTips.se värnar om din integritet. Denna policy beskriver hur vi hanterar personuppgifter enligt EU:s dataskyddsförordning (GDPR).</p>
+<p>projektorguiden.se värnar om din integritet. Denna policy beskriver hur vi hanterar personuppgifter enligt EU:s dataskyddsförordning (GDPR).</p>
 <h2>Personuppgiftsansvarig</h2>
-<p>ProjektorTips.se, kontakt: redaktion@projektortips.se.</p>
+<p>projektorguiden.se, kontakt: redaktion@projektorguiden.se.</p>
 <h2>Vilka uppgifter vi samlar in</h2>
 <p>Om du kontaktar oss via formulär eller e-post behandlar vi namn, e-postadress och meddelandeinnehåll för att kunna svara. Vi kan även samla in anonymiserad besöksstatistik via cookies för att förbättra webbplatsen.</p>
 <h2>Ändamål och rättslig grund</h2>
@@ -838,7 +907,7 @@ ${nav("index.html")}
 <h2>Lagringstid</h2>
 <p>Korrespondens sparas högst 24 månader om inte längre lagring krävs enligt lag.</p>
 <h2>Dina rättigheter</h2>
-<p>Du har rätt till tillgång, rättelse, radering, begränsning, invändning och dataportabilitet. Kontakta redaktion@projektortips.se. Du kan också klaga till Integritetsskyddsmyndigheten (IMY).</p>
+<p>Du har rätt till tillgång, rättelse, radering, begränsning, invändning och dataportabilitet. Kontakta redaktion@projektorguiden.se. Du kan också klaga till Integritetsskyddsmyndigheten (IMY).</p>
 <h2>Cookies</h2>
 <p>Vi använder nödvändiga cookies för webbplatsens funktion. Analyscookies aktiveras endast med ditt samtycke.</p>
 <p>Senast uppdaterad: maj 2026.</p>
@@ -852,7 +921,7 @@ const shortArticle = (file, opts) => {
 };
 
 shortArticle("projektor-sovrum.html", {
-  metaTitle: "Projektor i sovrummet: guide | ProjektorTips.se",
+  metaTitle: "Projektor i sovrummet: guide | projektorguiden.se",
   metaDesc: "Så får du projektor i sovrummet utan krångel. Rotation, ljud och mörkläggning.",
   activeCat: "kategori-guider.html",
   catLabel: "Guide",
@@ -871,7 +940,7 @@ shortArticle("projektor-sovrum.html", {
 });
 
 shortArticle("utomhusbio-guide.html", {
-  metaTitle: "Utomhusbio hemma: guide | ProjektorTips.se",
+  metaTitle: "Utomhusbio hemma: guide | projektorguiden.se",
   metaDesc: "Så sätter du upp utomhusbio på terrassen. El, duk och ljus.",
   activeCat: "kategori-tips.html",
   catLabel: "Tips",
@@ -889,7 +958,7 @@ shortArticle("utomhusbio-guide.html", {
 });
 
 shortArticle("hemmabio-budget.html", {
-  metaTitle: "Hemmabio under 5000 kr | ProjektorTips.se",
+  metaTitle: "Hemmabio under 5000 kr | projektorguiden.se",
   metaDesc: "Bygg hemmabio för under 5000 kr. Projektorn, ljud och duk.",
   activeCat: "kategori-hemmabio.html",
   catLabel: "Guide",
@@ -908,7 +977,7 @@ shortArticle("hemmabio-budget.html", {
 });
 
 shortArticle("ljud-projektor.html", {
-  metaTitle: "Bra ljud till projektor | ProjektorTips.se",
+  metaTitle: "Bra ljud till projektor | projektorguiden.se",
   metaDesc: "Bluetooth, soundbar eller stereo till din projektor.",
   activeCat: "kategori-tips.html",
   catLabel: "Tips",
@@ -927,7 +996,7 @@ shortArticle("ljud-projektor.html", {
 });
 
 shortArticle("optimera-rummet.html", {
-  metaTitle: "Optimera rummet för projektor | ProjektorTips.se",
+  metaTitle: "Optimera rummet för projektor | projektorguiden.se",
   metaDesc: "8 tips för bättre projektor-bild hemma.",
   activeCat: "kategori-tips.html",
   catLabel: "Tips",
@@ -946,7 +1015,7 @@ shortArticle("optimera-rummet.html", {
 });
 
 shortArticle("projiceringsduk-guide.html", {
-  metaTitle: "Välja projiceringsduk | ProjektorTips.se",
+  metaTitle: "Välja projiceringsduk | projektorguiden.se",
   metaDesc: "Storlek, material och när vägg räcker.",
   activeCat: "kategori-guider.html",
   catLabel: "Guide",
@@ -965,7 +1034,7 @@ shortArticle("projiceringsduk-guide.html", {
 });
 
 shortArticle("wifi-streaming.html", {
-  metaTitle: "WiFi-streaming till projektor | ProjektorTips.se",
+  metaTitle: "WiFi-streaming till projektor | projektorguiden.se",
   metaDesc: "WiFi 6 och stabilt streaming till smart projektor.",
   activeCat: "kategori-teknik.html",
   catLabel: "Teknik",
@@ -984,7 +1053,7 @@ shortArticle("wifi-streaming.html", {
 });
 
 shortArticle("keystone-guide.html", {
-  metaTitle: "Keystone-korrigering förklarat | ProjektorTips.se",
+  metaTitle: "Keystone-korrigering förklarat | projektorguiden.se",
   metaDesc: "Vad keystone är och hur auto-korrigering fungerar.",
   activeCat: "kategori-teknik.html",
   catLabel: "Teknik",
@@ -1002,7 +1071,7 @@ shortArticle("keystone-guide.html", {
 });
 
 shortArticle("4k-vs-1080p.html", {
-  metaTitle: "4K vs 1080p projektor | ProjektorTips.se",
+  metaTitle: "4K vs 1080p projektor | projektorguiden.se",
   metaDesc: "Vilken upplösning räcker för hemmabio?",
   activeCat: "kategori-teknik.html",
   catLabel: "Teknik",
@@ -1020,7 +1089,7 @@ shortArticle("4k-vs-1080p.html", {
 });
 
 shortArticle("projektor-vs-tv.html", {
-  metaTitle: "Projektor eller TV? | ProjektorTips.se",
+  metaTitle: "Projektor eller TV? | projektorguiden.se",
   metaDesc: "Ärlig jämförelse mellan projektor och stor-TV.",
   activeCat: "kategori-jamforelser.html",
   catLabel: "Jämförelse",
@@ -1040,7 +1109,7 @@ shortArticle("projektor-vs-tv.html", {
 });
 
 shortArticle("projektor-gaming.html", {
-  metaTitle: "Projektor för gaming | ProjektorTips.se",
+  metaTitle: "Projektor för gaming | projektorguiden.se",
   metaDesc: "Input lag, Hz och projektor för spel på storbild.",
   activeCat: "kategori-gaming.html",
   catLabel: "Gaming",
